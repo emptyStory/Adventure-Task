@@ -8,73 +8,85 @@ using UnityEngine.UI;
 
 public class QuestPanelManager : MonoBehaviour
 {
-    private GameObject[] questPanelPrefabParents; //All objects that are the parents of the button's prefab are stored here
+    // Массив для хранения всех объектов, которые являются родителями для кнопок
+    private GameObject[] questPanelPrefabParents;
 
-    private DatabaseManager buttonsList; //A script access variable that stores information about all buttons
+    // Переменная для доступа к списку кнопок
+    private DatabaseManager buttonsList;
     private GameObject buttonsListGameObject;
 
+    // Поля для отображения названия и описания квеста
     [SerializeField] private Task task;
+    public new TMP_Text name; // Поле для имени квеста
+    public TMP_Text description; // Поле для описания квеста
 
-    public new TMP_Text name; //The information that the user enters in the field implying the name of the quest
-    public TMP_Text description; //The information that the user enters in the field implying a description of the quest
-
+    // Префаб кнопки квеста
     public GameObject prefab;
     public GameObject questButton;
 
+    // Переменные для текущего квеста
     public GameObject currentQuest;
-
-    public GameObject questButtonCreate;
-    public GameObject questButtonEdit;
+    public GameObject questButtonCreate; // Кнопка для создания нового квеста
+    public GameObject questButtonEdit; // Кнопка для редактирования квеста
 
     private void Start()
     {
-        questPanelPrefabParents = GameObject.FindGameObjectsWithTag("questPanelPrefabParentTransform"); //We will find all objects on the scene with the tag questPanelPrefabParentTransform
+        // Ищем все объекты с тегом "questPanelPrefabParentTransform"
+        questPanelPrefabParents = GameObject.FindGameObjectsWithTag("questPanelPrefabParentTransform");
+
+        // Получаем доступ к объекту SceneManager
         buttonsListGameObject = GameObject.FindGameObjectWithTag("SceneManager");
-        buttonsList = buttonsListGameObject.GetComponent<DatabaseManager>(); //We get access to the script containing information about all the buttons
+        buttonsList = buttonsListGameObject.GetComponent<DatabaseManager>(); // Получаем доступ к скрипту базы данных кнопок
     }
 
-    public void CreateQuestButtonPressed() //This function describes the actions that occur after clicking the create quest button
+    // Метод, который вызывается при нажатии кнопки "Создать квест"
+    public void CreateQuestButtonPressed()
     {
-        GameObject questTransform;
-        questTransform = GameObject.FindGameObjectWithTag("questPanelPrefabParentTransform");
+        // Находим объект с тегом "questPanelPrefabParentTransform"
+        GameObject questTransform = GameObject.FindGameObjectWithTag("questPanelPrefabParentTransform");
+
+        // Создаем новый экземпляр кнопки квеста и добавляем его в родительский объект
         GameObject instantQuestPrefab = Instantiate(questButton, transform.position, transform.rotation);
         instantQuestPrefab.transform.SetParent(questTransform.transform);
         instantQuestPrefab.transform.localPosition = new Vector2(0, 0);
 
-        // Проверяем, существует ли инстанс task
+        // Проверяем, существует ли экземпляр task
         if (task == null)
         {
-            task = ScriptableObject.CreateInstance<Task>(); // Создаем новый инстанс
-            task.materialData = new List<Task.MaterialData>(); // Инициализируем список
-        } 
+            task = ScriptableObject.CreateInstance<Task>(); // Создаем новый экземпляр Task
+            task.materialData = new List<Task.MaterialData>(); // Инициализируем список данных
+        }
 
+        // Добавляем созданный квест в список активных квестов
         buttonsList.questTasksHolder.Add(task);
         buttonsList.activeObject = task;
 
-        // Проверяем, существует ли инстанс quest
+        // Проверяем, существует ли экземпляр quest
         if (buttonsList.questHolder == null)
         {
-            buttonsList.questHolder = ScriptableObject.CreateInstance<Quest>(); // Создаем новый инстанс
-            buttonsList.questHolder.materialData = new List<Quest.MaterialData>(); // Инициализируем список
+            buttonsList.questHolder = ScriptableObject.CreateInstance<Quest>(); // Создаем новый экземпляр Quest
+            buttonsList.questHolder.materialData = new List<Quest.MaterialData>(); // Инициализируем список данных
         }
 
-        // Создаем новый элемент MaterialData
-        Quest.MaterialData newMaterialData = new Quest.MaterialData();
-        newMaterialData.name = name.text;
-        newMaterialData.description = description.text;
-        newMaterialData.questButton = instantQuestPrefab;
-        newMaterialData.task = task;
+        // Создаем новый элемент данных для квеста
+        Quest.MaterialData newMaterialData = new Quest.MaterialData
+        {
+            name = name.text, // Присваиваем имя квеста
+            description = description.text, // Присваиваем описание квеста
+            questButton = instantQuestPrefab, // Привязываем созданную кнопку квеста
+            task = task // Привязываем задачу
+        };
 
-        // Добавляем элемент в список materialData
+        // Добавляем новый элемент в список данных
         buttonsList.questHolder.materialData.Add(newMaterialData);
         Debug.Log(buttonsList.questHolder.materialData);
 
-        // Находим объект с тегом taskPanelPrefabParentTransform
+        // Находим объект с тегом "taskPanelPrefabParentTransform"
         GameObject taskPanel = GameObject.FindGameObjectWithTag("taskPanelPrefabParentTransform");
 
         if (taskPanel != null)
         {
-            // Уничтожаем все дочерние элементы
+            // Уничтожаем все дочерние элементы в объекте taskPanel
             foreach (Transform child in taskPanel.transform)
             {
                 Destroy(child.gameObject);
@@ -85,12 +97,11 @@ public class QuestPanelManager : MonoBehaviour
             Debug.LogWarning("Объект с тегом 'taskPanelPrefabParentTransform' не найден.");
         }
 
+        // Отключаем компоненты Image всех дочерних объектов questTransform
         if (questTransform != null)
         {
-            // Итерируемся по всем дочерним объектам questTransform
             foreach (Transform child in questTransform.transform)
             {
-                // Получаем компонент Image из дочернего объекта
                 Image imageComponent = child.GetComponent<Image>();
 
                 if (imageComponent != null)
@@ -108,30 +119,32 @@ public class QuestPanelManager : MonoBehaviour
             Debug.LogError("questTransform равен null.");
         }
 
-        // Получаем компонент Image из дочернего объекта
+        // Включаем компонент Image на только что созданной кнопке
         Image imageComponent_02 = instantQuestPrefab.GetComponent<Image>();
         imageComponent_02.enabled = true;
 
+        // Удаляем префаб
         Destroy(prefab);
     }
 
-    public void QuestButtonEdit() //This function describes the actions that occur after clicking the create quest button
+    // Метод, который вызывается при редактировании квеста
+    public void QuestButtonEdit()
     {
-        
-
         foreach (var element in buttonsList.questHolder.materialData)
         {
             if (element.questButton == currentQuest)
             {
+                // Обновляем имя и описание квеста
                 element.name = name.text;
                 element.description = description.text;
 
-                // Получаем компонент TMP_Text из дочернего объекта questButton
+                // Получаем компонент TMP_Text из дочернего объекта кнопки квеста
                 TMP_Text questButtonTextComponent = element.questButton.GetComponentInChildren<TMP_Text>();
 
                 if (questButtonTextComponent != null)
                 {
-                    questButtonTextComponent.text = element.name; // Устанавливаем текст кнопки
+                    // Обновляем текст на кнопке
+                    questButtonTextComponent.text = element.name;
                 }
                 else
                 {
@@ -140,9 +153,11 @@ public class QuestPanelManager : MonoBehaviour
             }
         }
 
+        // Меняем видимость кнопок для редактирования и создания квеста
         questButtonEdit.SetActive(false);
         questButtonCreate.SetActive(true);
 
+        // Удаляем префаб
         Destroy(prefab);
     }
 }

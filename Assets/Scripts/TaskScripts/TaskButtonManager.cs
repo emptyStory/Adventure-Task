@@ -7,36 +7,38 @@ using UnityEngine.UI;
 
 public class TaskButtonManager : MonoBehaviour
 {
-    public Image taskButtonActiveColor;
-    public TMP_Text taskButtonText;
+    public Image taskButtonActiveColor;  // Ссылка на активный цвет кнопки задачи
+    public TMP_Text taskButtonText;      // Ссылка на текст кнопки задачи
 
-    private DatabaseManager buttonsList; //A script access variable that stores information about all buttons
-    private GameObject buttonsListGameObject;
+    private DatabaseManager buttonsList; // Переменная для доступа к скрипту, содержащему данные о всех кнопках
+    private GameObject buttonsListGameObject;  // Ссылка на объект с данным скриптом
 
-    private GameObject questPanelManagerGameObject;
-    private TaskPanelManager currentTask;
+    private GameObject questPanelManagerGameObject; // Панель управления квестом
+    private TaskPanelManager currentTask;  // Менеджер текущей задачи
 
-    private GameObject questButtonCreate;
-    private GameObject questButtonEdit;
+    private GameObject questButtonCreate;   // Кнопка создания квеста
+    private GameObject questButtonEdit;     // Кнопка редактирования квеста
 
-    public GameObject questButton;
+    public GameObject questButton;   // Ссылка на кнопку квеста
 
     public RectTransform buttonRect; // Ссылка на RectTransform кнопки
-    private bool isButtonPressed = false;
-    private bool isButtonHeld = false; // Флаг для отслеживания удержания
-    private float holdTime = 0.5f; // Время, после которого считается удержание
-    private float currentHoldTime = 0f; // Текущий таймер удержания
+    private bool isButtonPressed = false;   // Флаг, показывающий, была ли нажата кнопка
+    private bool isButtonHeld = false;      // Флаг, показывающий, удерживается ли кнопка
+    private float holdTime = 0.5f;  // Время удержания кнопки
+    private float currentHoldTime = 0f;  // Текущий таймер удержания кнопки
 
-    private TMP_Text nameField; // Ссылка на текстовое поле для имени
-    private TMP_Text descriptionField; // Ссылка на текстовое поле для описания
+    private TMP_Text nameField;  // Ссылка на текстовое поле для имени
+    private TMP_Text descriptionField;  // Ссылка на текстовое поле для описания
 
-    private Quest.MaterialData currentQuest;
+    private Quest.MaterialData currentQuest; // Данные текущего квеста
 
     void Start()
     {
+        // Ищем объект с тегом "SceneManager" для получения доступа к данным кнопок
         buttonsListGameObject = GameObject.FindGameObjectWithTag("SceneManager");
-        buttonsList = buttonsListGameObject.GetComponent<DatabaseManager>(); //We get access to the script containing information about all the buttons
+        buttonsList = buttonsListGameObject.GetComponent<DatabaseManager>();
 
+        // Ищем квест, к которому принадлежит эта кнопка, и отображаем его имя на кнопке
         foreach (var element in buttonsList.activeObject.materialData)
         {
             if (element.questButton == questButton)
@@ -48,7 +50,7 @@ public class TaskButtonManager : MonoBehaviour
 
     void Update()
     {
-        // Проверяем, есть ли касание
+        // Проверка наличия касания
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -67,12 +69,13 @@ public class TaskButtonManager : MonoBehaviour
             // Если касание продолжается
             if (touch.phase == TouchPhase.Stationary && isButtonPressed)
             {
-                currentHoldTime += Time.deltaTime; // Увеличиваем таймер удержания
+                currentHoldTime += Time.deltaTime;  // Увеличиваем таймер удержания
 
+                // Если время удержания прошло, выполняем нужное действие
                 if (currentHoldTime >= holdTime && !isButtonHeld)
                 {
-                    isButtonHeld = true; // Устанавливаем флаг удержания
-                    OnButtonHold(); // Вызываем метод удержания только один раз
+                    isButtonHeld = true;
+                    OnButtonHold();  // Вызываем обработчик удержания кнопки
                 }
             }
 
@@ -81,99 +84,102 @@ public class TaskButtonManager : MonoBehaviour
             {
                 if (isButtonPressed)
                 {
-                    if (!isButtonHeld) // Проверяем, было ли удержание
+                    if (!isButtonHeld)  // Если кнопка не была удержана, вызываем обработчик нажатия
                     {
-                        OnButtonDown(); // Вызываем метод нажатия только если не было удержания
+                        OnButtonDown();
                     }
                     isButtonPressed = false;
-                    isButtonHeld = false; // Сбрасываем флаг удержания
-                    currentHoldTime = 0f; // Сбрасываем таймер
-                    OnButtonUp();
+                    isButtonHeld = false;  // Сбрасываем флаг удержания
+                    currentHoldTime = 0f;  // Сбрасываем таймер
+                    OnButtonUp();  // Вызываем обработчик отпускания кнопки
                 }
             }
         }
     }
 
+    // Проверка, попадает ли касание на кнопку
     private bool IsTouchingButton(Vector2 touchPosition)
     {
-        // Проверяем, попадает ли позиция касания на кнопку
         return RectTransformUtility.RectangleContainsScreenPoint(buttonRect, touchPosition);
     }
 
+    // Метод для обработки нажатия кнопки
     private void OnButtonDown()
     {
         Debug.Log("Кнопка нажата");
-        // Ваш код для обработки нажатия кнопки
+        // Дополнительный код для обработки нажатия кнопки
     }
 
+    // Метод для обработки удержания кнопки
     private void OnButtonHold()
     {
         Debug.Log("Кнопка удерживается");
-        LoadTaskData();
-        // Ваш код для обработки удерживания кнопки
+        LoadTaskData();  // Загружаем данные задачи
     }
 
+    // Метод для обработки отпускания кнопки
     private void OnButtonUp()
     {
         Debug.Log("Кнопка отпущена");
-        // Ваш код для обработки отпускания кнопки
+        // Дополнительный код для обработки отпускания кнопки
     }
 
+    // Метод для загрузки данных задачи
     public void LoadTaskData()
     {
+        // Ищем нужный элемент в списке активных объектов и загружаем данные
         foreach (var element in buttonsList.activeObject.materialData)
         {
             if (element.questButton == questButton)
             {
+                // Создаем панель задачи и настраиваем её
                 GameObject instantTaskPanelPrefab = Instantiate(buttonsList.taskPanelPrefab, transform.position, transform.rotation);
                 instantTaskPanelPrefab.transform.SetParent(buttonsList.parentTransform);
-                instantTaskPanelPrefab.transform.localPosition = new Vector2(0, 0);
-                instantTaskPanelPrefab.transform.localScale = new Vector3(1, 1, 1);
+                instantTaskPanelPrefab.transform.localPosition = Vector2.zero;
+                instantTaskPanelPrefab.transform.localScale = Vector3.one;
+
+                // Находим текстовые поля для имени и описания
                 FindTextFields();
 
                 if (nameField != null)
                 {
-                    nameField.text = element.name;
+                    nameField.text = element.name;  // Устанавливаем имя задачи
                 }
 
                 if (descriptionField != null)
                 {
-                    descriptionField.text = element.description;
+                    descriptionField.text = element.description;  // Устанавливаем описание задачи
                 }
 
+                // Ищем кнопки создания и редактирования квеста
                 questButtonCreate = GameObject.FindGameObjectWithTag("QuestButtonCreate");
                 questButtonEdit = GameObject.FindGameObjectWithTag("QuestButtonEdit");
 
+                // Ищем панель с квестами и настраиваем текущую задачу
                 questPanelManagerGameObject = GameObject.FindGameObjectWithTag("QuestPanelManager");
                 currentTask = questPanelManagerGameObject.GetComponent<TaskPanelManager>();
 
                 currentTask.currentTask = questButton;
 
+                // Включаем все компоненты редактирования кнопки
                 var components = questButtonEdit.GetComponents<Component>();
-
-                // Включаем все выключенные компоненты
                 foreach (var component in components)
                 {
-                    // Проверяем, является ли компонент MonoBehaviour и выключен ли он
                     if (component is MonoBehaviour monoBehaviour && !monoBehaviour.enabled)
                     {
                         monoBehaviour.enabled = true;
                     }
                 }
 
-                questButtonCreate.SetActive(false);
-                //questButtonEdit.SetActive(true);
-
-
+                questButtonCreate.SetActive(false);  // Отключаем кнопку создания квеста
 
                 Debug.Log(element.name);
                 Debug.Log(element.description);
-
-                Debug.Log("Это пиздец товарищи, что-то где-то когда-то сломается и я ебнусь это чинить!");
             }
         }
     }
 
+    // Метод для поиска текстовых полей имени и описания
     private void FindTextFields()
     {
         GameObject[] nameObjects = GameObject.FindGameObjectsWithTag("Name");
@@ -190,45 +196,49 @@ public class TaskButtonManager : MonoBehaviour
         }
     }
 
+    // Метод для удаления задачи
     public void DeleteTask()
     {
-
+        // Удаляем задачу из списка активных объектов
         for (int i = buttonsList.activeObject.materialData.Count - 1; i >= 0; i--)
         {
             var element = buttonsList.activeObject.materialData[i];
             if (element.questButton == questButton)
             {
-                Destroy(element.questButton);
-                buttonsList.activeObject.materialData.RemoveAt(i);
+                Destroy(element.questButton);  // Удаляем кнопку задачи
+                buttonsList.activeObject.materialData.RemoveAt(i);  // Удаляем задачу из списка
             }
         }
 
+        // Ищем и удаляем связанные квесты
         for (int i = buttonsList.questHolder.materialData.Count - 1; i >= 0; i--)
         {
             var element = buttonsList.questHolder.materialData[i];
-
             if (element.task == buttonsList.activeObject)
             {
                 currentQuest = element;
             }
 
+            // Если задачи больше нет, удаляем квест и его кнопку
             if (buttonsList.activeObject.materialData.Count == 0 && currentQuest != null)
             {
                 Destroy(currentQuest.questButton);
                 buttonsList.questHolder.materialData.RemoveAt(i);
 
-                // Находим объект с компонентом DragObject
+                // Отключаем компонент DragObject
                 DragObject dragObject = FindObjectOfType<DragObject>();
                 dragObject.rectTransform.anchoredPosition = new Vector2(1080, dragObject.rectTransform.anchoredPosition.y);
                 dragObject.enabled = false;
-                Destroy(buttonsList.activeObject);
+
+                Destroy(buttonsList.activeObject);  // Удаляем сам объект задачи
             }
         }
     }
 
+    // Метод для завершения задачи
     public void CompliteTask()
     {
-
+        // Логика завершения задачи такая же, как и для удаления
         for (int i = buttonsList.activeObject.materialData.Count - 1; i >= 0; i--)
         {
             var element = buttonsList.activeObject.materialData[i];
@@ -239,27 +249,29 @@ public class TaskButtonManager : MonoBehaviour
             }
         }
 
+        // Ищем и завершаем квест, если задача больше не существует
         for (int i = buttonsList.questHolder.materialData.Count - 1; i >= 0; i--)
         {
             var element = buttonsList.questHolder.materialData[i];
-
             if (element.task == buttonsList.activeObject)
             {
                 currentQuest = element;
             }
 
+            // Если задачи больше нет, завершает квест и удаляет кнопку
             if (buttonsList.activeObject.materialData.Count == 0 && currentQuest != null)
             {
                 Destroy(currentQuest.questButton);
                 buttonsList.questHolder.materialData.RemoveAt(i);
 
-                // Находим объект с компонентом DragObject
+                // Находим объект с компонентом DragObject, чтобы сбросить позицию и отключить его
                 DragObject dragObject = FindObjectOfType<DragObject>();
                 dragObject.rectTransform.anchoredPosition = new Vector2(1080, dragObject.rectTransform.anchoredPosition.y);
                 dragObject.enabled = false;
+
+                // Удаляем объект задачи
                 Destroy(buttonsList.activeObject);
             }
         }
     }
 }
-

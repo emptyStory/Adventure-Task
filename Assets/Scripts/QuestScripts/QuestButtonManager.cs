@@ -7,49 +7,55 @@ using UnityEngine.UI;
 
 public class QuestButtonManager : MonoBehaviour
 {
-    public Image questButtonActiveColor;
-    public TMP_Text questButtonText;
+    // Публичные ссылки на элементы интерфейса
+    public Image questButtonActiveColor; // Цвет активной кнопки
+    public TMP_Text questButtonText; // Текст на кнопке
 
-    private DatabaseManager buttonsList; //A script access variable that stores information about all buttons
+    // Ссылки на объекты, управляющие данными
+    private DatabaseManager buttonsList; // Сценарий, который управляет всеми кнопками
     private GameObject buttonsListGameObject;
 
-    private GameObject questPanelManagerGameObject;
-    private QuestPanelManager currentQuest;
+    private GameObject questPanelManagerGameObject; // Объект управления панелью квестов
+    private QuestPanelManager currentQuest; // Текущий квест
 
-    private GameObject questButtonCreate;
-    private GameObject questButtonEdit;
+    private GameObject questButtonCreate; // Кнопка для создания квеста
+    private GameObject questButtonEdit; // Кнопка для редактирования квеста
 
-    public GameObject questButton;
-
+    public GameObject questButton; // Кнопка квеста
     public RectTransform buttonRect; // Ссылка на RectTransform кнопки
-    private bool isButtonPressed = false;
-    private bool isButtonHeld = false; // Флаг для отслеживания удержания
-    private float holdTime = 1.0f; // Время, после которого считается удержание
+
+    // Флаги и таймеры для отслеживания взаимодействия с кнопкой
+    private bool isButtonPressed = false; // Флаг для отслеживания нажатия
+    private bool isButtonHeld = false; // Флаг для отслеживания удержания кнопки
+    private float holdTime = 1.0f; // Время удержания кнопки для активации действия
     private float currentHoldTime = 0f; // Текущий таймер удержания
 
-    private TMP_Text nameField; // Ссылка на текстовое поле для имени
-    private TMP_Text descriptionField; // Ссылка на текстовое поле для описания
+    // Текстовые поля для отображения данных
+    private TMP_Text nameField; // Поле для имени
+    private TMP_Text descriptionField; // Поле для описания
 
-    //Task field
+    // Префаб для создания кнопок задач
     public GameObject taskButtonPrefab;
 
     void Start()
     {
+        // Получаем ссылку на объект, управляющий кнопками
         buttonsListGameObject = GameObject.FindGameObjectWithTag("SceneManager");
-        buttonsList = buttonsListGameObject.GetComponent<DatabaseManager>(); //We get access to the script containing information about all the buttons
+        buttonsList = buttonsListGameObject.GetComponent<DatabaseManager>();
 
+        // Инициализируем текст кнопки с названием квеста
         foreach (var element in buttonsList.questHolder.materialData)
         {
             if (element.questButton == questButton)
             {
-                questButtonText.text = element.name;
+                questButtonText.text = element.name; // Устанавливаем текст на кнопку
             }
         }
     }
 
     void Update()
     {
-        // Проверяем, есть ли касание
+        // Проверка на касание экрана
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -73,66 +79,71 @@ public class QuestButtonManager : MonoBehaviour
                 if (currentHoldTime >= holdTime && !isButtonHeld)
                 {
                     isButtonHeld = true; // Устанавливаем флаг удержания
-                    OnButtonHold(); // Вызываем метод удержания только один раз
+                    OnButtonHold(); // Вызываем обработчик удержания
                 }
             }
 
-            // Если касание закончилось
+            // Если касание завершилось
             if (touch.phase == TouchPhase.Ended)
             {
                 if (isButtonPressed)
                 {
-                    if (!isButtonHeld) // Проверяем, было ли удержание
+                    if (!isButtonHeld) // Если не было удержания
                     {
-                        OnButtonDown(); // Вызываем метод нажатия только если не было удержания
+                        OnButtonDown(); // Вызываем обработчик нажатия
                     }
                     isButtonPressed = false;
                     isButtonHeld = false; // Сбрасываем флаг удержания
                     currentHoldTime = 0f; // Сбрасываем таймер
-                    OnButtonUp();
+                    OnButtonUp(); // Вызываем обработчик отпускания
                 }
             }
         }
     }
 
+    // Проверка попадания касания на кнопку
     private bool IsTouchingButton(Vector2 touchPosition)
     {
-        // Проверяем, попадает ли позиция касания на кнопку
         return RectTransformUtility.RectangleContainsScreenPoint(buttonRect, touchPosition);
     }
 
+    // Обработка нажатия кнопки
     private void OnButtonDown()
     {
         Debug.Log("Кнопка нажата");
-        // Ваш код для обработки нажатия кнопки
-        TasksLoad();
+        TasksLoad(); // Загружаем задачи
     }
 
+    // Обработка удержания кнопки
     private void OnButtonHold()
     {
         Debug.Log("Кнопка удерживается");
-        LoadData();
-        // Ваш код для обработки удерживания кнопки
+        LoadData(); // Загружаем данные для квеста
     }
 
+    // Обработка отпускания кнопки
     private void OnButtonUp()
     {
         Debug.Log("Кнопка отпущена");
-        // Ваш код для обработки отпускания кнопки
+        // Дополнительная обработка отпуска кнопки (если требуется)
     }
 
+    // Метод для загрузки данных квеста
     public void LoadData()
     {
         foreach (var element in buttonsList.questHolder.materialData)
         {
             if (element.questButton == questButton)
             {
+                // Создаем панель с данными квеста
                 GameObject instantQuestPanelPrefab = Instantiate(buttonsList.questPanelPrefab, transform.position, transform.rotation);
                 instantQuestPanelPrefab.transform.SetParent(buttonsList.parentTransform);
-                instantQuestPanelPrefab.transform.localPosition = new Vector2(0, 0);
-                instantQuestPanelPrefab.transform.localScale = new Vector3(1, 1, 1);
-                FindTextFields();
+                instantQuestPanelPrefab.transform.localPosition = Vector2.zero;
+                instantQuestPanelPrefab.transform.localScale = Vector3.one;
 
+                FindTextFields(); // Ищем поля для имени и описания
+
+                // Заполняем текстовые поля данными из элемента квеста
                 if (nameField != null)
                 {
                     nameField.text = element.name;
@@ -143,79 +154,67 @@ public class QuestButtonManager : MonoBehaviour
                     descriptionField.text = element.description;
                 }
 
+                // Инициализация кнопок редактирования и создания квеста
                 questButtonCreate = GameObject.FindGameObjectWithTag("QuestButtonCreate");
                 questButtonEdit = GameObject.FindGameObjectWithTag("QuestButtonEdit");
 
                 questPanelManagerGameObject = GameObject.FindGameObjectWithTag("QuestPanelManager");
                 currentQuest = questPanelManagerGameObject.GetComponent<QuestPanelManager>();
 
-                currentQuest.currentQuest = questButton;
+                currentQuest.currentQuest = questButton; // Устанавливаем текущий квест
 
+                // Включаем все отключенные компоненты на кнопке редактирования
                 var components = questButtonEdit.GetComponents<Component>();
-
-                // Включаем все выключенные компоненты
                 foreach (var component in components)
                 {
-                    // Проверяем, является ли компонент MonoBehaviour и выключен ли он
                     if (component is MonoBehaviour monoBehaviour && !monoBehaviour.enabled)
                     {
                         monoBehaviour.enabled = true;
                     }
                 }
 
-                questButtonCreate.SetActive(false);
+                questButtonCreate.SetActive(false); // Отключаем кнопку создания квеста
 
                 Debug.Log(element.name);
                 Debug.Log(element.description);
-
-                Debug.Log("Это пиздец товарищи, что-то где-то когда-то сломается и я ебнусь это чинить!");
             }
         }
     }
 
+    // Метод для загрузки задач в панель задач
     public void TasksLoad()
     {
-
-        // Находим объект с тегом taskPanelPrefabParentTransform
         GameObject taskPanel = GameObject.FindGameObjectWithTag("taskPanelPrefabParentTransform");
-        // Находим объект с тегом questPanelPrefabParentTransform
         GameObject questPanel = GameObject.FindGameObjectWithTag("questPanelPrefabParentTransform");
         DragObject dragObject = FindObjectOfType<DragObject>();
 
         if (taskPanel != null)
         {
-            // Уничтожаем все дочерние элементы
+            // Удаляем все дочерние элементы панели задач
             foreach (Transform child in taskPanel.transform)
             {
                 Destroy(child.gameObject);
             }
 
-            // Инстанциируем новые префабы на основе данных из scriptable object task
+            // Загружаем задачи для соответствующего квеста
             foreach (var element in buttonsList.questHolder.materialData)
             {
-                if (element.questButton == questButton) // Проверяем соответствие префаба
+                if (element.questButton == questButton)
                 {
-                    // Получаем доступ к scriptable object
-                    Task task = element.task; // Предполагаем, что у вас есть поле task в element
-
-                    // Проверяем, что task не равен null
+                    Task task = element.task;
                     if (task != null)
                     {
                         foreach (var taskElement in task.materialData)
                         {
-                            if (taskElement != null) // Проверяем, что taskElement не равен null
+                            if (taskElement != null)
                             {
                                 GameObject instantiatedButton = Instantiate(taskButtonPrefab, taskPanel.transform);
-                                taskElement.questButton = instantiatedButton; // Присваиваем созданный объект
+                                taskElement.questButton = instantiatedButton; // Присваиваем кнопку задачи
                             }
                         }
                     }
-
-                    // Здесь можно настроить созданный экземпляр кнопки, например, установить текст или обработчик событий
-                    // questButtonInstance.GetComponentInChildren<Text>().text = element.task.name; // Пример установки текста
-
                     buttonsList.activeObject = element.task;
-                } 
+                }
             }
         }
         else
@@ -223,14 +222,12 @@ public class QuestButtonManager : MonoBehaviour
             Debug.LogWarning("Объект с тегом 'taskPanelPrefabParentTransform' не найден.");
         }
 
+        // Отключаем компоненты интерфейса квеста, если они не нужны
         if (questPanel != null)
         {
-            // Итерируемся по всем дочерним объектам questPanel
             foreach (Transform child in questPanel.transform)
             {
-                // Получаем объект GameObject из Transform
                 GameObject childGameObject = child.gameObject;
-
                 if (childGameObject != null)
                 {
                     Image imageComponent = childGameObject.GetComponent<Image>();
@@ -238,25 +235,16 @@ public class QuestButtonManager : MonoBehaviour
                     {
                         imageComponent.enabled = false;
                     }
-                    else
-                    {
-                        Debug.LogWarning("Компонент Image не найден на объекте child.");
-                    }
-                }
-                else
-                {
-                    Debug.LogError("child равен null.");
                 }
             }
         }
 
-        dragObject.enabled = true;
+        dragObject.enabled = true; // Включаем компонент DragObject
         dragObject.rectTransform.anchoredPosition = new Vector2(0, dragObject.rectTransform.anchoredPosition.y);
-        questButtonActiveColor.enabled = true;
+        questButtonActiveColor.enabled = true; // Активируем цвет кнопки
     }
 
-    
-
+    // Поиск текстовых полей для имени и описания
     private void FindTextFields()
     {
         GameObject[] nameObjects = GameObject.FindGameObjectsWithTag("Name");
@@ -273,9 +261,9 @@ public class QuestButtonManager : MonoBehaviour
         }
     }
 
+    // Удаление квеста
     public void DeleteQuest()
     {
-        // Находим объект с тегом taskPanelPrefabParentTransform
         GameObject taskPanel = GameObject.FindGameObjectWithTag("taskPanelPrefabParentTransform");
 
         for (int i = buttonsList.questHolder.materialData.Count - 1; i >= 0; i--)
@@ -284,32 +272,35 @@ public class QuestButtonManager : MonoBehaviour
 
             if (element.questButton == questButton)
             {
+                // Удаляем связанные задачи и сам квест
                 Destroy(element.task);
 
                 if (taskPanel != null)
                 {
-                    // Уничтожаем все дочерние элементы
+                    // Удаляем все дочерние элементы панели задач
                     foreach (Transform child in taskPanel.transform)
                     {
                         Destroy(child.gameObject);
                     }
                 }
 
+                // Удаляем кнопку квеста и сам квест из списка
                 Destroy(element.questButton);
                 buttonsList.questHolder.materialData.RemoveAt(i);
             }
         }
-        if(buttonsList.questHolder.materialData.Count == 0)
+
+        // Если больше нет квестов, отключаем DragObject
+        if (buttonsList.questHolder.materialData.Count == 0)
         {
-            // Находим объект с компонентом DragObject
             DragObject dragObject = FindObjectOfType<DragObject>();
             dragObject.enabled = false;
         }
     }
 
+    // Завершение квеста
     public void CompliteQuest()
     {
-        // Находим объект с тегом taskPanelPrefabParentTransform
         GameObject taskPanel = GameObject.FindGameObjectWithTag("taskPanelPrefabParentTransform");
 
         for (int i = buttonsList.questHolder.materialData.Count - 1; i >= 0; i--)
@@ -318,27 +309,29 @@ public class QuestButtonManager : MonoBehaviour
 
             if (element.questButton == questButton)
             {
+                // Удаляем связанные задачи
                 Destroy(element.task);
 
                 if (taskPanel != null)
                 {
-                    // Уничтожаем все дочерние элементы
+                    // Удаляем все дочерние элементы панели задач
                     foreach (Transform child in taskPanel.transform)
                     {
                         Destroy(child.gameObject);
                     }
                 }
 
+                // Удаляем кнопку квеста и сам квест из списка
                 Destroy(element.questButton);
                 buttonsList.questHolder.materialData.RemoveAt(i);
             }
         }
+
+        // Если больше нет квестов, отключаем DragObject
         if (buttonsList.questHolder.materialData.Count == 0)
         {
-            // Находим объект с компонентом DragObject
             DragObject dragObject = FindObjectOfType<DragObject>();
             dragObject.enabled = false;
         }
     }
 }
-

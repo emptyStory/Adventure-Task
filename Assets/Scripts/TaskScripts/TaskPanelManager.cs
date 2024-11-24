@@ -12,66 +12,78 @@ using System.Collections;
 
 public class TaskPanelManager : MonoBehaviour
 {
-    private GameObject[] taskPanelPrefabParents; //All objects that are the parents of the button's prefab are stored here
+    // Массив для хранения всех объектов, которые являются родителями для кнопок
+    private GameObject[] taskPanelPrefabParents;
 
-    private DatabaseManager buttonsList; //A script access variable that stores information about all buttons
+    // Переменная для доступа к списку кнопок
+    private DatabaseManager buttonsList;
     private GameObject buttonsListGameObject;
 
-    [SerializeField] private Task task; //Variable of access to the creation of an instance of a script object that stores information entered by the user in the quest panel
-
-    public new TMP_Text name; //The information that the user enters in the field implying the name of the quest
-    public TMP_Text description; //The information that the user enters in the field implying a description of the quest
+    // Переменные для ввода данных о задаче (название, описание и таймер)
+    [SerializeField] private Task task;
+    public new TMP_Text name; // Поле для ввода имени задачи
+    public TMP_Text description; // Поле для ввода описания задачи
 
     public GameObject prefab;
     public GameObject taskButton;
 
-    public GameObject currentTask;
+    public GameObject currentTask; // Текущая задача, которая редактируется
 
-    public GameObject taskButtonCreate;
-    public GameObject taskButtonEdit;
+    public GameObject taskButtonCreate; // Кнопка для создания задачи
+    public GameObject taskButtonEdit; // Кнопка для редактирования задачи
 
-    //Здесь идёт описание переменных для таймера, отслеживающего время за которое необходимо выполнить задачу
+    // Переменные для отслеживания времени задачи (таймер)
     public TMP_InputField hoursInput; // Поле ввода для часов
     public TMP_InputField minutesInput; // Поле ввода для минут
-    public TMP_Text countdownText; // Текстовое поле для отображения обратного отсчёта
+    public TMP_Text countdownText; // Поле для отображения времени обратного отсчёта
 
-    private Timer timer;
-
+    private Timer timer; // Экземпляр таймера
 
     private void Start()
     {
-        taskPanelPrefabParents = GameObject.FindGameObjectsWithTag("taskPanelPrefabParentTransform"); //We will find all objects on the scene with the tag questPanelPrefabParentTransform
+        // Ищем все объекты с тегом "taskPanelPrefabParentTransform"
+        taskPanelPrefabParents = GameObject.FindGameObjectsWithTag("taskPanelPrefabParentTransform");
+
+        // Получаем объект SceneManager и доступ к базе данных кнопок
         buttonsListGameObject = GameObject.FindGameObjectWithTag("SceneManager");
-        buttonsList = buttonsListGameObject.GetComponent<DatabaseManager>(); //We get access to the script containing information about all the buttons
+        buttonsList = buttonsListGameObject.GetComponent<DatabaseManager>();
     }
 
-    public void TaskButtonCreate() //This function describes the actions that occur after clicking the create quest button
+    // Метод для создания новой задачи
+    public void TaskButtonCreate()
     {
         GameObject taskTransform;
+        // Находим объект с тегом "taskPanelPrefabParentTransform" для добавления кнопки
         taskTransform = GameObject.FindGameObjectWithTag("taskPanelPrefabParentTransform");
+
+        // Создаем новый экземпляр кнопки задачи и устанавливаем её в родительский объект
         GameObject instantTaskPrefab = Instantiate(taskButton, transform.position, transform.rotation);
         instantTaskPrefab.transform.SetParent(taskTransform.transform);
         instantTaskPrefab.transform.localPosition = new Vector2(0, 0);
         instantTaskPrefab.transform.localScale = new Vector3(1, 1, 1);
 
+        // Создаем новый объект данных для задачи
+        Task.MaterialData newMaterialData = new Task.MaterialData
+        {
+            name = name.text, // Имя задачи
+            description = description.text, // Описание задачи
+            questButton = instantTaskPrefab // Кнопка для задачи
+        };
 
-        Task.MaterialData newMaterialData = new Task.MaterialData();
-        newMaterialData.name = name.text;
-        newMaterialData.description = description.text;
-        newMaterialData.questButton = instantTaskPrefab;
+        // Добавляем новую задачу в список
+        buttonsList.activeObject.materialData.Add(newMaterialData);
 
-        buttonsList.activeObject.materialData.Add(newMaterialData); // Добавляем элемент в список
-
+        // Запускаем таймер для задачи
         StartTimer();
 
+        // Удаляем префаб
         Destroy(prefab);
     }
-    
-    
 
-    public void TaskButtonEdit() //This function describes the actions that occur after clicking the create quest button
+    // Метод для редактирования существующей задачи
+    public void TaskButtonEdit()
     {
-
+        // Ищем задачу в списке и обновляем её данные
         foreach (var element in buttonsList.taskHolder.materialData)
         {
             if (element.questButton == currentTask)
@@ -79,12 +91,11 @@ public class TaskPanelManager : MonoBehaviour
                 element.name = name.text;
                 element.description = description.text;
 
-                // Получаем компонент TMP_Text из дочернего объекта questButton
+                // Обновляем текст на кнопке
                 TMP_Text questButtonTextComponent = element.questButton.GetComponentInChildren<TMP_Text>();
-
                 if (questButtonTextComponent != null)
                 {
-                    questButtonTextComponent.text = element.name; // Устанавливаем текст кнопки
+                    questButtonTextComponent.text = element.name; // Обновляем текст кнопки
                 }
                 else
                 {
@@ -93,33 +104,37 @@ public class TaskPanelManager : MonoBehaviour
             }
         }
 
+        // Меняем видимость кнопок для редактирования и создания задачи
         taskButtonEdit.SetActive(false);
         taskButtonCreate.SetActive(true);
 
+        // Удаляем префаб
         Destroy(prefab);
     }
 
+    // Метод для старта таймера
     private void StartTimer()
     {
-        BeforeStartTimer();
+        BeforeStartTimer(); // Подготовка к запуску таймера
 
-        // Парсим введенные данные
+        // Парсим введенные данные для часов и минут
         if (int.TryParse(hoursInput.text, out int hours) && int.TryParse(minutesInput.text, out int minutes))
         {
             // Устанавливаем время в таймере
             timer.SetTime(hours, minutes);
             timer.StartCountdown(timer);
-            StartCoroutine(UpdateCountdownDisplay());
+            StartCoroutine(UpdateCountdownDisplay()); // Запускаем обновление отображения времени
         }
         else
         {
-            Debug.LogError("Invalid input! Please enter valid hours and minutes.");
+            Debug.LogError("Неверный ввод! Пожалуйста, введите корректные часы и минуты.");
         }
     }
 
+    // Метод для подготовки таймера перед запуском
     public void BeforeStartTimer()
     {
-        // Создаем объект Timer и добавляем его в сцену
+        // Создаем объект Timer и добавляем его на сцену
         GameObject timerObject = new GameObject("Timer");
         timer = timerObject.AddComponent<Timer>();
 
@@ -127,32 +142,36 @@ public class TaskPanelManager : MonoBehaviour
         timer.TimerFinished += OnTimerFinished;
     }
 
+    // Метод для обновления отображения времени в реальном времени
     private IEnumerator UpdateCountdownDisplay()
     {
         while (timer.TimeRemaining > 0)
         {
+            // Обновляем отображение времени
             UpdateTimeDisplay(timer.TimeRemaining);
             yield return new WaitForSeconds(1f); // Ждем 1 секунду
         }
 
-        UpdateTimeDisplay(0); // Обновляем текстовое поле по окончании таймера
+        // Обновляем отображение времени, когда таймер завершен
+        UpdateTimeDisplay(0);
     }
 
+    // Метод, который вызывается по завершении таймера
     private void OnTimerFinished()
     {
-        Debug.Log("Timer finished!"); // Сообщение в консоль о завершении таймера
-        UpdateTimeDisplay(0); // Обновляем текстовое поле по окончании таймера
+        Debug.Log("Таймер завершен!"); // Сообщение в консоль
+        UpdateTimeDisplay(0); // Обновляем отображение времени
     }
 
+    // Метод для обновления текстового поля с оставшимся временем
     private void UpdateTimeDisplay(float timeRemaining)
     {
-        // Преобразуем время в формат часов, минут и секунд
+        // Преобразуем оставшееся время в формат часов, минут и секунд
         int hours = Mathf.FloorToInt(timeRemaining / 3600);
         int minutes = Mathf.FloorToInt((timeRemaining % 3600) / 60);
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
 
-        // Обновляем текстовое поле
+        // Обновляем текстовое поле с отображением времени
         countdownText.text = $"{hours:D2}:{minutes:D2}:{seconds:D2}";
     }
-
 }
