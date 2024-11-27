@@ -32,6 +32,11 @@ public class TaskButtonManager : MonoBehaviour
 
     private Quest.MaterialData currentQuest; // Данные текущего квеста
 
+
+    //является флагом для функции, которая передаёт пользователю валюту и опыт
+    private bool taskIsCompleted = false;
+    private bool questIsCompleted = false;
+
     void Start()
     {
         // Ищем объект с тегом "SceneManager" для получения доступа к данным кнопок
@@ -246,6 +251,8 @@ public class TaskButtonManager : MonoBehaviour
             {
                 Destroy(element.questButton);
                 buttonsList.activeObject.materialData.RemoveAt(i);
+                taskIsCompleted = true;
+                MoneyAndExpirienceAdd();
             }
         }
 
@@ -263,6 +270,8 @@ public class TaskButtonManager : MonoBehaviour
             {
                 Destroy(currentQuest.questButton);
                 buttonsList.questHolder.materialData.RemoveAt(i);
+                questIsCompleted = true;
+                MoneyAndExpirienceAdd();
 
                 // Находим объект с компонентом DragObject, чтобы сбросить позицию и отключить его
                 DragObject dragObject = FindObjectOfType<DragObject>();
@@ -274,4 +283,72 @@ public class TaskButtonManager : MonoBehaviour
             }
         }
     }
+
+    /*
+    public void MoneyAndExpirienceAdd()
+    {
+        var characterProgressControllHolder = GameObject.FindGameObjectWithTag("CharacterProgressControll");
+        var characterProgressControllScript = characterProgressControllHolder.GetComponent<CharacterProgressControll>();
+
+        if (taskIsCompleted)
+        {
+            characterProgressControllScript.money = +characterProgressControllScript.taskMoneyIncreaser;
+            characterProgressControllScript.exp = +characterProgressControllScript.taskExpIncreaser;
+
+
+        } else if (questIsCompleted)
+        {
+            characterProgressControllScript.money = +characterProgressControllScript.questMoneyIncreaser; 
+            characterProgressControllScript.exp = +characterProgressControllScript.questExpIncreaser;
+        }
+    }
+    */
+
+    public void MoneyAndExpirienceAdd()
+    {
+        var characterProgressControllHolder = GameObject.FindGameObjectWithTag("CharacterProgressControll");
+        var characterProgressControllScript = characterProgressControllHolder.GetComponent<CharacterProgressControll>();
+
+        float expIncrease = 0;
+
+        if (taskIsCompleted)
+        {
+            characterProgressControllScript.money += characterProgressControllScript.taskMoneyIncreaser;
+            characterProgressControllScript.exp += characterProgressControllScript.taskExpIncreaser;
+            //expIncrease = characterProgressControllScript.taskExpIncreaser / 100f; // Делим на 100 для корректного увеличения
+        }
+
+        if (questIsCompleted)
+        {
+            characterProgressControllScript.money += characterProgressControllScript.questMoneyIncreaser;
+            characterProgressControllScript.exp += characterProgressControllScript.questExpIncreaser;
+            //expIncrease = characterProgressControllScript.questExpIncreaser / 100f; // Делим на 100 для корректного увеличения
+        }
+
+        if (taskIsCompleted || questIsCompleted)
+        {
+            expIncrease = characterProgressControllScript.exp / 100f; //Делим на 100 для корректного увеличения
+        }
+
+        // Увеличиваем значение слайдера
+        characterProgressControllScript.characterLevelSlider.value += expIncrease;
+
+        // Проверяем, не превышает ли слайдер максимальное значение
+        if (characterProgressControllScript.characterLevelSlider.value >= 1f)
+        {
+            // Сохраняем остаток
+            float overflow = characterProgressControllScript.characterLevelSlider.value - 1f;
+
+            // Увеличиваем уровень персонажа
+            //characterProgressControllScript.exp += 1; // Увеличиваем опыт на 1, так как уровень увеличивается
+            characterProgressControllScript.characterLevelValue.text = characterProgressControllScript.characterLevelValue.text + 1;
+
+            // Сбрасываем слайдер
+            characterProgressControllScript.characterLevelSlider.value = overflow; // Остаток после достижения 1
+        }
+
+        // Обновляем текстовые поля
+        characterProgressControllScript.characterMoneyValue.text = characterProgressControllScript.money.ToString();
+    }
+
 }

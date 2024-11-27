@@ -868,7 +868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1405,6 +1405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 460513715}
   - component: {fileID: 460513716}
+  - component: {fileID: 460513717}
   m_Layer: 5
   m_Name: CharacterPanel
   m_TagString: Untagged
@@ -1458,6 +1459,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &460513717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460513714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c32258f606c0ab49b636eca53cde68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskMoneyIncreaser: 0
+  taskExpIncreaser: 0
+  questMoneyIncreaser: 0
+  questExpIncreaser: 0
+  money: 0
+  exp: 0
+  characterLevelSlider: {fileID: 0}
+  characterLevelValue: {fileID: 0}
+  characterMoneyValue: {fileID: 0}
 --- !u!1 &461182973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,9 +1862,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1670893273}
-        m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 564930543}
+        m_TargetAssemblyTypeName: InstanceScreenController, Assembly-CSharp
+        m_MethodName: CharacterProgressExitButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2052,9 +2074,11 @@ GameObject:
   - component: {fileID: 564930541}
   - component: {fileID: 564930540}
   - component: {fileID: 564930539}
+  - component: {fileID: 564930543}
+  - component: {fileID: 564930544}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: CharacterProgressControll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2144,6 +2168,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &564930543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564930538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88ce70805b55f8468b7039f39cc34a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterProgressRoot: {fileID: 672949088}
+  characterProgressEnter: {fileID: 842340893}
+  characterProgressExit: {fileID: 1670893273}
+--- !u!114 &564930544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564930538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c32258f606c0ab49b636eca53cde68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskMoneyIncreaser: 10
+  taskExpIncreaser: 10
+  questMoneyIncreaser: 20
+  questExpIncreaser: 20
+  money: 0
+  exp: 0
+  characterLevelSlider: {fileID: 1483598285}
+  characterLevelValue: {fileID: 346145959}
+  characterMoneyValue: {fileID: 2119561838}
 --- !u!1 &590499100
 GameObject:
   m_ObjectHideFlags: 0
@@ -2790,7 +2850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1080, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &672949090
@@ -5814,6 +5874,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea964c159b26e064995da0f7baada8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
+  minX: -200
+  maxX: 200
+  moveSpeed: 5
   maxAngleDeviation: 35
 --- !u!1 &1358574298
 GameObject:
@@ -7571,9 +7635,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 842340893}
-        m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 564930543}
+        m_TargetAssemblyTypeName: InstanceScreenController, Assembly-CSharp
+        m_MethodName: CharacterProgressEnterButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

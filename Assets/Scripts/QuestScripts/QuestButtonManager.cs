@@ -37,6 +37,9 @@ public class QuestButtonManager : MonoBehaviour
     // Префаб для создания кнопок задач
     public GameObject taskButtonPrefab;
 
+    //является флагом для функции, которая передаёт пользователю валюту и опыт
+    private bool questIsCompleted = false;
+
     void Start()
     {
         // Получаем ссылку на объект, управляющий кнопками
@@ -324,6 +327,8 @@ public class QuestButtonManager : MonoBehaviour
                 // Удаляем кнопку квеста и сам квест из списка
                 Destroy(element.questButton);
                 buttonsList.questHolder.materialData.RemoveAt(i);
+                questIsCompleted = true;
+                MoneyAndExpirienceAdd();
             }
         }
 
@@ -334,4 +339,61 @@ public class QuestButtonManager : MonoBehaviour
             dragObject.enabled = false;
         }
     }
+
+    /*
+    public void MoneyAndExpirienceAdd()
+    {
+        var characterProgressControllHolder = GameObject.FindGameObjectWithTag("CharacterProgressControll");
+        var characterProgressControllScript = characterProgressControllHolder.GetComponent<CharacterProgressControll>();
+
+        if (questIsCompleted)
+        {
+            characterProgressControllScript.money = +characterProgressControllScript.taskMoneyIncreaser;
+            characterProgressControllScript.exp = +characterProgressControllScript.taskExpIncreaser;
+        }
+    }
+    */
+
+    public void MoneyAndExpirienceAdd()
+    {
+        var characterProgressControllHolder = GameObject.FindGameObjectWithTag("CharacterProgressControll");
+        var characterProgressControllScript = characterProgressControllHolder.GetComponent<CharacterProgressControll>();
+
+        float expIncrease = 0;
+
+        
+
+        if (questIsCompleted)
+        {
+            characterProgressControllScript.money += characterProgressControllScript.questMoneyIncreaser;
+            characterProgressControllScript.exp += characterProgressControllScript.questExpIncreaser;
+            //expIncrease = characterProgressControllScript.questExpIncreaser / 100f; // Делим на 100 для корректного увеличения
+        }
+
+        if (questIsCompleted)
+        {
+            expIncrease = characterProgressControllScript.exp / 100f; //Делим на 100 для корректного увеличения
+        }
+
+        // Увеличиваем значение слайдера
+        characterProgressControllScript.characterLevelSlider.value += expIncrease;
+
+        // Проверяем, не превышает ли слайдер максимальное значение
+        if (characterProgressControllScript.characterLevelSlider.value >= 1f)
+        {
+            // Сохраняем остаток
+            float overflow = characterProgressControllScript.characterLevelSlider.value - 1f;
+
+            // Увеличиваем уровень персонажа
+            //characterProgressControllScript.exp += 1; // Увеличиваем опыт на 1, так как уровень увеличивается
+            characterProgressControllScript.characterLevelValue.text = characterProgressControllScript.characterLevelValue.text.ToString() + 1.ToString();
+
+            // Сбрасываем слайдер
+            characterProgressControllScript.characterLevelSlider.value = overflow; // Остаток после достижения 1
+        }
+
+        // Обновляем текстовые поля
+        characterProgressControllScript.characterMoneyValue.text = characterProgressControllScript.money.ToString();
+    }
+
 }
