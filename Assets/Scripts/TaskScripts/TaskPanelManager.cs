@@ -139,7 +139,7 @@ public class TaskPanelManager : MonoBehaviour
         timer = timerObject.AddComponent<Timer>();
 
         // Подписываемся на событие завершения таймера
-        timer.TimerFinished += OnTimerFinished;
+        //timer.TimerFinished += OnTimerFinished;
     }
 
     // Метод для обновления отображения времени в реальном времени
@@ -156,12 +156,14 @@ public class TaskPanelManager : MonoBehaviour
         UpdateTimeDisplay(0);
     }
 
+    /*
     // Метод, который вызывается по завершении таймера
     private void OnTimerFinished()
     {
         Debug.Log("Таймер завершен!"); // Сообщение в консоль
         UpdateTimeDisplay(0); // Обновляем отображение времени
     }
+    */
 
     // Метод для обновления текстового поля с оставшимся временем
     private void UpdateTimeDisplay(float timeRemaining)

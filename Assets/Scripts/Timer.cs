@@ -7,6 +7,9 @@ public class Timer : MonoBehaviour
     // Время, оставшееся до завершения таймера
     private float timeRemaining;
 
+    // Время, когда был запущен таймер
+    private DateTime timerStartTime;
+
     // Свойство для получения оставшегося времени
     public float TimeRemaining => timeRemaining;
 
@@ -20,14 +23,13 @@ public class Timer : MonoBehaviour
     public Transform parentTransform;
 
     // Метод для установки времени таймера
-    // Принимает количество часов и минут и конвертирует их в секунды
     public void SetTime(int hours, int minutes)
     {
         timeRemaining = (hours * 3600) + (minutes * 60); // Преобразуем время в секунды
+        timerStartTime = DateTime.Now; // Запоминаем время начала
     }
 
     // Метод для старта отсчета таймера
-    // Запускает корутину для отсчета
     public void StartCountdown(MonoBehaviour caller)
     {
         // Запускаем корутину отсчета времени
@@ -37,49 +39,77 @@ public class Timer : MonoBehaviour
     // Корутин для отсчета времени
     private IEnumerator CountdownCoroutine()
     {
-        // Пока оставшееся время больше 0
         while (timeRemaining > 0)
         {
-            // Ожидаем 1 секунду
             yield return new WaitForSeconds(1f);
-
-            // Уменьшаем оставшееся время
             timeRemaining--;
-
-            // Для отладки выводим оставшееся время в консоль
             Debug.Log(timeRemaining);
         }
 
-        // Когда время закончилось, вызываем событие завершения таймера
         TimerFinished?.Invoke();
-
-        // Выполняем действия после завершения таймера
         OnTimerFinished();
     }
 
-    // Метод, который выполняется по завершении таймера
     private void OnTimerFinished()
     {
-        // Выводим сообщение в консоль
         Debug.Log("Timer finished!");
+        characterDamage();
 
-        // Создаем префаб, который будет отображаться по завершении таймера
         GameObject instantTaskPanelPrefab = Instantiate(timerFinishedPrefab, transform.position, transform.rotation);
-
-        // Устанавливаем родительский объект для префаба
         instantTaskPanelPrefab.transform.SetParent(parentTransform);
-
-        // Устанавливаем позицию и масштаб префаба
         instantTaskPanelPrefab.transform.localPosition = Vector2.zero;
         instantTaskPanelPrefab.transform.localScale = Vector3.one;
 
-        // Уничтожаем объект таймера, так как он больше не нужен
         Destroy(gameObject);
     }
 
-    // Метод для обновления состояния таймера (если требуется вручную)
-    public void UpdateTimer()
+    public void characterDamage()
     {
-        // Этот метод можно использовать для обновления состояния таймера вручную, если нужно
+        var characterProgressControllHolder = GameObject.FindGameObjectWithTag("CharacterProgressControll");
+        var characterProgressControllScript = characterProgressControllHolder.GetComponent<CharacterProgressControll>();
+
+        float currentSliderValue = characterProgressControllScript.characterLifeSlider.value;
+        float newSliderValue = currentSliderValue - 10;
+
+        if (newSliderValue < 0)
+        {
+            newSliderValue = 0;
+        }
+
+        characterProgressControllScript.characterLifeSlider.value = newSliderValue;
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            CheckTimerStatus();
+        }
+    }
+
+    private void CheckTimerStatus()
+    {
+        // Получаем текущее время
+        DateTime currentTime = DateTime.Now;
+        Debug.Log(currentTime);
+
+        // Вычисляем прошедшее время с момента запуска таймера
+        TimeSpan elapsedTime = currentTime - timerStartTime;
+
+        // Уменьшаем оставшееся время на прошедшее время в секундах
+        timeRemaining -= (float)elapsedTime.TotalSeconds;
+
+        // Если таймер закончился, вызываем событие завершения
+        if (timeRemaining <= 0)
+        {
+            timeRemaining = 0; // Устанавливаем оставшееся время в 0
+            TimerFinished?.Invoke();
+            OnTimerFinished();
+        }
+        else
+        {
+            // Обновляем время старта на текущее (для следующего вызова)
+            timerStartTime = DateTime.Now;
+        }
     }
 }

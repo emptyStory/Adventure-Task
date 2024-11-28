@@ -4,6 +4,7 @@ using TMPro;
 
 public class CharacterProgressControll : MonoBehaviour
 {
+    //переменные отвечающие за деньги и опыт, а также за их начисление
     [Header("Settings")]
     [Tooltip("how much to increase the money for completing the task")]
     public int taskMoneyIncreaser;
@@ -24,4 +25,8 @@ public class CharacterProgressControll : MonoBehaviour
     public TMP_Text characterLevelValue;
 
     public TMP_Text characterMoneyValue;
+
+    //переменные отвечающие за жизни персонажа
+    public TMP_Text characterName;
+    public Slider characterLifeSlider;
 }
