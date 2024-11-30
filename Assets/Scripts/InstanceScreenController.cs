@@ -10,6 +10,9 @@ public class InstanceScreenController : MonoBehaviour
     public PlayableDirector characterProgressEnter;
     public PlayableDirector characterProgressExit;
 
+    //переменные, контролирующие переход и выход из раздела с магазином
+    public GameObject storeRoot;
+
     public void CharacterProgressEnterButtonPressed() //функция перехода в раздел с персонажем
     {
         characterProgressRoot.SetActive(true);
@@ -20,5 +23,15 @@ public class InstanceScreenController : MonoBehaviour
     {
         characterProgressExit.Play();
         characterProgressRoot.SetActive(false);
+    }
+
+    public void StoreEnterButtonPressed() //функция перехода в раздел с персонажем
+    {
+        storeRoot.SetActive(true);
+    }
+
+    public void StoreExitButtonPressed() //функция перехода в раздел с персонажем
+    {
+        storeRoot.SetActive(false);
     }
 }

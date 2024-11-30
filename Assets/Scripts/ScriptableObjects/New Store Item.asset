@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9570fe653d009f43805ab61f089afbd, type: 3}
+  m_Name: New Store Item
+  m_EditorClassIdentifier: 
+  storeItemsData:
+  - itemName: "\u0445\u0438\u043B\u043A\u0430"
+    itemDescription: "\u0445\u0438\u043B\u0438\u0442 \u0442\u0435\u0431\u044F \u043F\u043E\u043A\u0430
+      \u0442\u044B \u0441\u043F\u0438\u0448\u044C"
+    itemImage: {fileID: 2800000, guid: a0fc465d6cf04254a2938578735e2383, type: 3}
+  - itemName: "\u0448\u0430\u043F\u043A\u0430 1"
+    itemDescription: "\u0439\u043E\u0443"
+    itemImage: {fileID: 2800000, guid: 602cb87b6a29443b8636370ea0751574, type: 3}
+  - itemName: "\u0448\u0430\u043F\u043A\u0430 2"
+    itemDescription: "\u0439\u043E\u0443 2"
+    itemImage: {fileID: 2800000, guid: 8878a782f4334ecbbcf683b3ac780966, type: 3}
+  - itemName: "\u0448\u0430\u043F\u043A\u0430 3"
+    itemDescription: "\u0439\u043E\u0443 3"
+    itemImage: {fileID: 2800000, guid: 283f897e4925411ebbaa758b4cb13fc2, type: 3}

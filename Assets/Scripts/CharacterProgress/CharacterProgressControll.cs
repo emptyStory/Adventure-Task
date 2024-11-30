@@ -29,4 +29,5 @@ public class CharacterProgressControll : MonoBehaviour
     //переменные отвечающие за жизни персонажа
     public TMP_Text characterName;
     public Slider characterLifeSlider;
+
 }
