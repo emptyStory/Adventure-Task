@@ -6,7 +6,9 @@ using UnityEngine.Timeline;
 public class InstanceScreenController : MonoBehaviour
 {
     //переменные, контролирующие переход и выход из раздела с персонажем
+    public GameObject mainScreen;
     public GameObject characterProgressRoot;
+    public GameObject characterPanelBackgroundImage;
     public PlayableDirector characterProgressEnter;
     public PlayableDirector characterProgressExit;
 
@@ -15,14 +17,18 @@ public class InstanceScreenController : MonoBehaviour
 
     public void CharacterProgressEnterButtonPressed() //функция перехода в раздел с персонажем
     {
+        mainScreen.SetActive(false);
         characterProgressRoot.SetActive(true);
+        characterPanelBackgroundImage.SetActive(false);
         characterProgressEnter.Play();
     }
 
     public void CharacterProgressExitButtonPressed() //функция выхода из раздела с персонажем
     {
         characterProgressExit.Play();
+        mainScreen.SetActive(true);
         characterProgressRoot.SetActive(false);
+        characterPanelBackgroundImage.SetActive(true);
     }
 
     public void StoreEnterButtonPressed() //функция перехода в раздел с персонажем

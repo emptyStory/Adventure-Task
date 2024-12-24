@@ -14,6 +14,11 @@ public class ButtonHandler : MonoBehaviour
 
     private void OnButtonClick(StoreItem.StoreItemsData item)
     {
+        // Переменная для хранения ссылки на GameObject с кнопкой
+        GameObject buttonGameObject;
+        // Получаем GameObject, на котором висит этот компонент
+        buttonGameObject = gameObject;
+
         // Обновляем UI элементы
         itemNameText.text = item.itemName;
         itemDescriptionText.text = item.itemDescription;
