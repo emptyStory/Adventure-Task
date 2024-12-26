@@ -617,6 +617,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &59239425 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 783130910818971230, guid: 3ae5d68cbdddccf4685d7db17cd19d49,
+    type: 3}
+  m_PrefabInstance: {fileID: 532521320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &146201507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,6 +1897,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346145957}
   m_CullTransparentMesh: 1
+--- !u!137 &407990464 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 783130911303482111, guid: 3ae5d68cbdddccf4685d7db17cd19d49,
+    type: 3}
+  m_PrefabInstance: {fileID: 532521320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -4207,6 +4219,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4012053581773936983, guid: b3593823a3db14e4ca5974d33136bf95,
     type: 3}
   m_PrefabInstance: {fileID: 599462061}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &607500378 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 783130912759319965, guid: 3ae5d68cbdddccf4685d7db17cd19d49,
+    type: 3}
+  m_PrefabInstance: {fileID: 532521320}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &615940225
 GameObject:
@@ -6890,6 +6908,10 @@ MonoBehaviour:
   chestIcon: {fileID: 2077143282}
   legsIcon: {fileID: 1810480014}
   shoesIcon: {fileID: 827094832}
+  head: {fileID: 964743292}
+  chest: {fileID: 407990464}
+  legs: {fileID: 59239425}
+  shoes: {fileID: 607500378}
   headItems:
   - {fileID: 11400000, guid: 0bc9fcf5d8382f44ca6e84010473daf2, type: 2}
   - {fileID: 11400000, guid: d330f5168a64da145988d9009843d33f, type: 2}
@@ -6902,6 +6924,12 @@ MonoBehaviour:
   shoesItems:
   - {fileID: 11400000, guid: f528534e579916046ad2885564850f43, type: 2}
   - {fileID: 11400000, guid: ce9ff6e23488a3642bf6eb0cb230df32, type: 2}
+--- !u!137 &964743292 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 783130911580473160, guid: 3ae5d68cbdddccf4685d7db17cd19d49,
+    type: 3}
+  m_PrefabInstance: {fileID: 532521320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &965774590
 GameObject:
   m_ObjectHideFlags: 0

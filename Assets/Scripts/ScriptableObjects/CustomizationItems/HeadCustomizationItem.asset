@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b971b3e762da6348bca8fd7333651cc, type: 3}
   m_Name: HeadCustomizationItem
   m_EditorClassIdentifier: 
-  iconTexture: {fileID: 0}
-  mesh: {fileID: 0}
+  iconTexture: {fileID: 2800000, guid: cbaeed03e5416aa4bae23110b63a0c7d, type: 3}
+  mesh: {fileID: -3034166429907067627, guid: 1f5e1f35102e339459ae10bcf684ee2d, type: 3}

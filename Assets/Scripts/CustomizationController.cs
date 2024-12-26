@@ -9,6 +9,11 @@ public class CustomizationController : MonoBehaviour
     public Image legsIcon;
     public Image shoesIcon;
 
+    public SkinnedMeshRenderer head;
+    public SkinnedMeshRenderer chest;
+    public SkinnedMeshRenderer legs;
+    public SkinnedMeshRenderer shoes;
+
     public List<CustomizationItem> headItems;
     public List<CustomizationItem> chestItems;
     public List<CustomizationItem> legsItems;
@@ -28,20 +33,28 @@ public class CustomizationController : MonoBehaviour
     private void UpdateIcons()
     {
         if (headItems.Count > 0)
+        {
             headIcon.sprite = Sprite.Create(headItems[currentHeadIndex].iconTexture, new Rect(0, 0, headItems[currentHeadIndex].iconTexture.width, headItems[currentHeadIndex].iconTexture.height), new Vector2(0.5f, 0.5f));
+            head.sharedMesh = headItems[currentHeadIndex].mesh;
+        }
 
         if (chestItems.Count > 0)
+        {
             chestIcon.sprite = Sprite.Create(chestItems[currentChestIndex].iconTexture, new Rect(0, 0, chestItems[currentChestIndex].iconTexture.width, chestItems[currentChestIndex].iconTexture.height), new Vector2(0.5f, 0.5f));
-
+            chest.sharedMesh = headItems[currentHeadIndex].mesh;
+        }
+            
         if (legsItems.Count > 0)
+        {
             legsIcon.sprite = Sprite.Create(legsItems[currentLegsIndex].iconTexture, new Rect(0, 0, legsItems[currentLegsIndex].iconTexture.width, legsItems[currentLegsIndex].iconTexture.height), new Vector2(0.5f, 0.5f));
+            legs.sharedMesh = headItems[currentHeadIndex].mesh;
+        }
 
         if (shoesItems.Count > 0)
+        {
             shoesIcon.sprite = Sprite.Create(shoesItems[currentShoesIndex].iconTexture, new Rect(0, 0, shoesItems[currentShoesIndex].iconTexture.width, shoesItems[currentShoesIndex].iconTexture.height), new Vector2(0.5f, 0.5f));
-
-        // Здесь вы можете обновить меши вашего персонажа
-        // Например:
-        // meshRenderer.sharedMesh = headItems[currentHeadIndex].mesh;
+            shoes.sharedMesh = headItems[currentHeadIndex].mesh;
+        }
     }
 
     public void changeHeadItemLeft()
