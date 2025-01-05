@@ -5,4 +5,5 @@ public class CustomizationItem : ScriptableObject
 {
     public Texture2D iconTexture;
     public Mesh mesh;
+    public Material material;
 }

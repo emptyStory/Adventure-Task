@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b971b3e762da6348bca8fd7333651cc, type: 3}
-  m_Name: ShoesCustomizationItem_02
+  m_Name: ShoesCustomizationItem
   m_EditorClassIdentifier: 
-  iconTexture: {fileID: 0}
-  mesh: {fileID: 0}
+  iconTexture: {fileID: 2800000, guid: 411f66a6528585147a5e953705e002eb, type: 3}
+  mesh: {fileID: 7953725260033477193, guid: 55295a45c3d658c44b42c8e67983b8db, type: 3}
+  material: {fileID: 2100000, guid: bd95d05da092ee546bb149f526e4d054, type: 2}

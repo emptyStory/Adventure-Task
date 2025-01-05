@@ -36,24 +36,28 @@ public class CustomizationController : MonoBehaviour
         {
             headIcon.sprite = Sprite.Create(headItems[currentHeadIndex].iconTexture, new Rect(0, 0, headItems[currentHeadIndex].iconTexture.width, headItems[currentHeadIndex].iconTexture.height), new Vector2(0.5f, 0.5f));
             head.sharedMesh = headItems[currentHeadIndex].mesh;
+            head.sharedMaterial = headItems[currentHeadIndex].material;
         }
 
         if (chestItems.Count > 0)
         {
             chestIcon.sprite = Sprite.Create(chestItems[currentChestIndex].iconTexture, new Rect(0, 0, chestItems[currentChestIndex].iconTexture.width, chestItems[currentChestIndex].iconTexture.height), new Vector2(0.5f, 0.5f));
-            chest.sharedMesh = headItems[currentHeadIndex].mesh;
+            chest.sharedMesh = chestItems[currentChestIndex].mesh;
+            chest.sharedMaterial = chestItems[currentChestIndex].material;
         }
             
         if (legsItems.Count > 0)
         {
             legsIcon.sprite = Sprite.Create(legsItems[currentLegsIndex].iconTexture, new Rect(0, 0, legsItems[currentLegsIndex].iconTexture.width, legsItems[currentLegsIndex].iconTexture.height), new Vector2(0.5f, 0.5f));
-            legs.sharedMesh = headItems[currentHeadIndex].mesh;
+            legs.sharedMesh = legsItems[currentLegsIndex].mesh;
+            legs.sharedMaterial = legsItems[currentLegsIndex].material;
         }
 
         if (shoesItems.Count > 0)
         {
             shoesIcon.sprite = Sprite.Create(shoesItems[currentShoesIndex].iconTexture, new Rect(0, 0, shoesItems[currentShoesIndex].iconTexture.width, shoesItems[currentShoesIndex].iconTexture.height), new Vector2(0.5f, 0.5f));
-            shoes.sharedMesh = headItems[currentHeadIndex].mesh;
+            shoes.sharedMesh = shoesItems[currentShoesIndex].mesh;
+            shoes.sharedMaterial = shoesItems[currentShoesIndex].material;
         }
     }
 

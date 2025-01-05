@@ -1,27 +1,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using static StoreItem;
 
 public class ButtonHandler : MonoBehaviour
 {
-    public StoreItem storeItem; // Ссылка на наш ScriptableObject
-    public List<GameObject> itemButtonsList = new List<GameObject>();
+    // Ссылка на ваш ScriptableObject
+    public StoreItem storeItem;
 
-    public Text itemNameText; // UI элемент для отображения имени
-    public Text itemDescriptionText; // UI элемент для отображения описания
-    public RawImage itemImage; // UI элемент для отображения изображения
+    // Публичные переменные для отображения информации о товаре
+    public TMP_Text itemNameText;
+    public TMP_Text itemDescriptionText;
+    public Image itemImage;
 
-    private void OnButtonClick(StoreItem.StoreItemsData item)
+    // Функция для отображения товара по индексу
+    public void ShowItem(int index)
     {
-        // Переменная для хранения ссылки на GameObject с кнопкой
-        GameObject buttonGameObject;
-        // Получаем GameObject, на котором висит этот компонент
-        buttonGameObject = gameObject;
+        if (storeItem.storeItemsData.Count > index && index >= 0)
+        {
+            StoreItem.StoreItemsData itemData = storeItem.storeItemsData[index];
 
-        // Обновляем UI элементы
-        itemNameText.text = item.itemName;
-        itemDescriptionText.text = item.itemDescription;
-        itemImage.texture = item.itemImage;
+            // Обновляем текстовые поля и изображение
+            itemNameText.text = itemData.itemName;
+            itemDescriptionText.text = itemData.itemDescription;
+            itemImage.sprite = itemData.itemImage; // Изменено на sprite
+        }
+        else
+        {
+            Debug.LogWarning("Индекс товара вне диапазона.");
+        }
+    }
+
+    private void Start()
+    {
+        // Отображаем первый элемент при старте
+        ShowItem(0);
     }
 }

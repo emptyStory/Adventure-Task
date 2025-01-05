@@ -19,7 +19,7 @@ public class StoreItem : ScriptableObject
         public string itemDescription;
 
         // Карточа товара
-        public Texture itemImage;
+        public Sprite itemImage;
 
     }
 }

@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b971b3e762da6348bca8fd7333651cc, type: 3}
-  m_Name: LegsCustomizationItem
+  m_Name: HeadCustomizationItem_02
   m_EditorClassIdentifier: 
-  iconTexture: {fileID: 0}
-  mesh: {fileID: 0}
+  iconTexture: {fileID: 2800000, guid: 5ace1bb423b9a3a4d95002e50f7d0c1f, type: 3}
+  mesh: {fileID: -673171223053553957, guid: 3ead610a6ac15a5468da02e01bc73974, type: 3}
+  material: {fileID: 2100000, guid: 2201ceec7d3860f4ab732faec1cead0b, type: 2}

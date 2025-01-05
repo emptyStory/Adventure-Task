@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b971b3e762da6348bca8fd7333651cc, type: 3}
-  m_Name: HeadCustomizationItem_02
+  m_Name: ChestCustomizationItem
   m_EditorClassIdentifier: 
-  iconTexture: {fileID: 2800000, guid: c1d870384c7ed3c49b30d01278bf3949, type: 3}
-  mesh: {fileID: -673171223053553957, guid: 3ead610a6ac15a5468da02e01bc73974, type: 3}
+  iconTexture: {fileID: 2800000, guid: 740b6253c357fa1489c27291e659440b, type: 3}
+  mesh: {fileID: 7021145606560831276, guid: 55295a45c3d658c44b42c8e67983b8db, type: 3}
+  material: {fileID: 2100000, guid: bd95d05da092ee546bb149f526e4d054, type: 2}
