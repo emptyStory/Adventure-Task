@@ -1,0 +1,20 @@
+2025-2-16
+Rendering UV GBuffer for LMGroup_GameObject 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "D:/BakeryTEMP" "uvpos_LMGroup_GameObject.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "D:/BakeryTEMP" "PointBatch_0_0_1" 4 0 0 batchpointlight_0_0_1.bin
+Running ftraceRTX addmul "D:/BakeryTEMP" "LMGroup_GameObject" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "D:/BakeryTEMP" "LMGroup_GameObject_diffuse" 4 16 0 "gi_LMGroup_GameObject0.bin" "LMGroup_GameObject_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "D:/BakeryTEMP" "LMGroup_GameObject_diffuse" 4 16 0 "gi_LMGroup_GameObject1.bin" "LMGroup_GameObject_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "D:/BakeryTEMP" "LMGroup_GameObject_diffuse" 4 16 0 "gi_LMGroup_GameObject2.bin" "LMGroup_GameObject_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "D:/BakeryTEMP" "LMGroup_GameObject_diffuse" 4 16 0 "gi_LMGroup_GameObject3.bin" "LMGroup_GameObject_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "D:/BakeryTEMP" "LMGroup_GameObject_final" 4 16 0 "gi_LMGroup_GameObject4.bin" "LMGroup_GameObject_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "D:/BakeryTEMP/LMGroup_GameObject_final_HDR.lz4" "D:/BakeryTEMP/LMGroup_GameObject_final_HDR.lz4" 2048 0
+Running seamfixer "D:/BakeryTEMP" "0" "LMGroup_GameObject_final_HDR.lz4"
+Running halffloat2hdr "D:/BakeryTEMP/LMGroup_GameObject_final_HDR.lz4" "D:/git/Adventure Task/Assets/Scenes/AdventureTask/LMGroup_GameObject_final.hdr" 1024

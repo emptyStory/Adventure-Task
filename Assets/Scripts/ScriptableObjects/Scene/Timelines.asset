@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1669f27be70a3644b9075a947250489, type: 3}
+  m_Name: Timelines
+  m_EditorClassIdentifier: 
+  timelineItemsData:
+  - animationTrigger: 
+    duration: 0
+    playableAsset: {fileID: 11400000, guid: 18f0bfa7a1ffe2d49afd7fbc90ba683e, type: 2}
+    texts: []
+  - animationTrigger: 
+    duration: 0
+    playableAsset: {fileID: 11400000, guid: 1045c7252887afe47b4c11650656a15d, type: 2}
+    texts: []
+  - animationTrigger: 
+    duration: 0
+    playableAsset: {fileID: 11400000, guid: 359e34c71add39746a33e40e406f7906, type: 2}
+    texts: []
