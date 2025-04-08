@@ -244,7 +244,6 @@ public class QuestButtonManager : MonoBehaviour
 
         dragObject.enabled = true; // Включаем компонент DragObject
         dragObject.rectTransform.anchoredPosition = new Vector2(0, dragObject.rectTransform.anchoredPosition.y);
-        questButtonActiveColor.enabled = true; // Активируем цвет кнопки
     }
 
     // Поиск текстовых полей для имени и описания
@@ -339,20 +338,6 @@ public class QuestButtonManager : MonoBehaviour
             dragObject.enabled = false;
         }
     }
-
-    /*
-    public void MoneyAndExpirienceAdd()
-    {
-        var characterProgressControllHolder = GameObject.FindGameObjectWithTag("CharacterProgressControll");
-        var characterProgressControllScript = characterProgressControllHolder.GetComponent<CharacterProgressControll>();
-
-        if (questIsCompleted)
-        {
-            characterProgressControllScript.money = +characterProgressControllScript.taskMoneyIncreaser;
-            characterProgressControllScript.exp = +characterProgressControllScript.taskExpIncreaser;
-        }
-    }
-    */
 
     public void MoneyAndExpirienceAdd()
     {
