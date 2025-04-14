@@ -54,6 +54,31 @@ public class QuestButtonManager : MonoBehaviour
                 questButtonText.text = element.name; // Устанавливаем текст на кнопку
             }
         }
+
+        // Получаем высоту текста и применяем её к кнопке
+        AdjustButtonHeightToText();
+    }
+
+
+    // Новый метод для подгонки высоты кнопки под текст
+    private void AdjustButtonHeightToText()
+    {
+        if (questButtonText != null && buttonRect != null)
+        {
+            // Получаем предпочтительную высоту текста (учитывая перенос строк)
+            float textHeight = questButtonText.preferredHeight;
+
+            // Устанавливаем новую высоту для RectTransform кнопки
+            buttonRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight);
+
+            // Если нужно добавить отступы, можно использовать:
+            // float padding = 10f;
+            // buttonRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, textHeight + padding);
+        }
+        else
+        {
+            Debug.LogWarning("QuestButtonText или ButtonRect не назначены в инспекторе!");
+        }
     }
 
     void Update()
