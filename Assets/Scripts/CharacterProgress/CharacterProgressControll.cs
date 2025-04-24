@@ -25,9 +25,4 @@ public class CharacterProgressControll : MonoBehaviour
     public TMP_Text characterLevelValue;
 
     public TMP_Text characterMoneyValue;
-
-    //переменные отвечающие за жизни персонажа
-    public TMP_Text characterName;
-    public Slider characterLifeSlider;
-
 }

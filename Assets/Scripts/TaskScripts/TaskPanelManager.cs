@@ -32,13 +32,6 @@ public class TaskPanelManager : MonoBehaviour
     public GameObject taskButtonCreate; // Кнопка для создания задачи
     public GameObject taskButtonEdit; // Кнопка для редактирования задачи
 
-    // Переменные для отслеживания времени задачи (таймер)
-    public TMP_InputField hoursInput; // Поле ввода для часов
-    public TMP_InputField minutesInput; // Поле ввода для минут
-    public TMP_Text countdownText; // Поле для отображения времени обратного отсчёта
-
-    private Timer timer; // Экземпляр таймера
-
     private void Start()
     {
         // Ищем все объекты с тегом "taskPanelPrefabParentTransform"
@@ -72,9 +65,6 @@ public class TaskPanelManager : MonoBehaviour
 
         // Добавляем новую задачу в список
         buttonsList.activeObject.materialData.Add(newMaterialData);
-
-        // Запускаем таймер для задачи
-        StartTimer();
 
         // Удаляем префаб
         Destroy(prefab);
@@ -110,70 +100,5 @@ public class TaskPanelManager : MonoBehaviour
 
         // Удаляем префаб
         Destroy(prefab);
-    }
-
-    // Метод для старта таймера
-    private void StartTimer()
-    {
-        BeforeStartTimer(); // Подготовка к запуску таймера
-
-        // Парсим введенные данные для часов и минут
-        if (int.TryParse(hoursInput.text, out int hours) && int.TryParse(minutesInput.text, out int minutes))
-        {
-            // Устанавливаем время в таймере
-            timer.SetTime(hours, minutes);
-            timer.StartCountdown(timer);
-            StartCoroutine(UpdateCountdownDisplay()); // Запускаем обновление отображения времени
-        }
-        else
-        {
-            Debug.LogError("Неверный ввод! Пожалуйста, введите корректные часы и минуты.");
-        }
-    }
-
-    // Метод для подготовки таймера перед запуском
-    public void BeforeStartTimer()
-    {
-        // Создаем объект Timer и добавляем его на сцену
-        GameObject timerObject = new GameObject("Timer");
-        timer = timerObject.AddComponent<Timer>();
-
-        // Подписываемся на событие завершения таймера
-        //timer.TimerFinished += OnTimerFinished;
-    }
-
-    // Метод для обновления отображения времени в реальном времени
-    private IEnumerator UpdateCountdownDisplay()
-    {
-        while (timer.TimeRemaining > 0)
-        {
-            // Обновляем отображение времени
-            UpdateTimeDisplay(timer.TimeRemaining);
-            yield return new WaitForSeconds(1f); // Ждем 1 секунду
-        }
-
-        // Обновляем отображение времени, когда таймер завершен
-        UpdateTimeDisplay(0);
-    }
-
-    /*
-    // Метод, который вызывается по завершении таймера
-    private void OnTimerFinished()
-    {
-        Debug.Log("Таймер завершен!"); // Сообщение в консоль
-        UpdateTimeDisplay(0); // Обновляем отображение времени
-    }
-    */
-
-    // Метод для обновления текстового поля с оставшимся временем
-    private void UpdateTimeDisplay(float timeRemaining)
-    {
-        // Преобразуем оставшееся время в формат часов, минут и секунд
-        int hours = Mathf.FloorToInt(timeRemaining / 3600);
-        int minutes = Mathf.FloorToInt((timeRemaining % 3600) / 60);
-        int seconds = Mathf.FloorToInt(timeRemaining % 60);
-
-        // Обновляем текстовое поле с отображением времени
-        countdownText.text = $"{hours:D2}:{minutes:D2}:{seconds:D2}";
     }
 }

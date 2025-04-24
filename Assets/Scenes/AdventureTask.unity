@@ -11490,8 +11490,6 @@ MonoBehaviour:
   characterLevelSlider: {fileID: 0}
   characterLevelValue: {fileID: 0}
   characterMoneyValue: {fileID: 0}
-  characterName: {fileID: 0}
-  characterLifeSlider: {fileID: 0}
 --- !u!1001 &460866927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16587,9 +16585,7 @@ MonoBehaviour:
   exp: 0
   characterLevelSlider: {fileID: 0}
   characterLevelValue: {fileID: 0}
-  characterMoneyValue: {fileID: 2119561838}
-  characterName: {fileID: 0}
-  characterLifeSlider: {fileID: 0}
+  characterMoneyValue: {fileID: 908711201}
 --- !u!1001 &565499882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25896,7 +25892,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 560
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40c8446de106643a3a1e6a2b2f202ba8, type: 2}
   m_sharedMaterial: {fileID: -5442046258175417756, guid: 40c8446de106643a3a1e6a2b2f202ba8,

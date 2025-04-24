@@ -11,6 +11,9 @@ public class QuestButtonManager : MonoBehaviour
     public Image questButtonActiveColor; // Цвет активной кнопки
     public TMP_Text questButtonText; // Текст на кнопке
 
+    // Новая публичная переменная для длительности задержки
+    public float destroyDelayDuration = 1.0f;
+
     // Ссылки на объекты, управляющие данными
     private DatabaseManager buttonsList; // Сценарий, который управляет всеми кнопками
     private GameObject buttonsListGameObject;
@@ -58,7 +61,6 @@ public class QuestButtonManager : MonoBehaviour
         // Получаем высоту текста и применяем её к кнопке
         AdjustButtonHeightToText();
     }
-
 
     // Новый метод для подгонки высоты кнопки под текст
     private void AdjustButtonHeightToText()
@@ -291,6 +293,11 @@ public class QuestButtonManager : MonoBehaviour
     // Удаление квеста
     public void DeleteQuest()
     {
+        StartCoroutine(DeleteQuestWithDelay());
+    }
+
+    private IEnumerator DeleteQuestWithDelay()
+    {
         GameObject taskPanel = GameObject.FindGameObjectWithTag("taskPanelPrefabParentTransform");
 
         for (int i = buttonsList.questHolder.materialData.Count - 1; i >= 0; i--)
@@ -311,6 +318,9 @@ public class QuestButtonManager : MonoBehaviour
                     }
                 }
 
+                // Добавляем задержку перед уничтожением элемента
+                yield return new WaitForSeconds(destroyDelayDuration);
+
                 // Удаляем кнопку квеста и сам квест из списка
                 Destroy(element.questButton);
                 buttonsList.questHolder.materialData.RemoveAt(i);
@@ -327,6 +337,11 @@ public class QuestButtonManager : MonoBehaviour
 
     // Завершение квеста
     public void CompliteQuest()
+    {
+        StartCoroutine(CompleteQuestWithDelay());
+    }
+
+    private IEnumerator CompleteQuestWithDelay()
     {
         GameObject taskPanel = GameObject.FindGameObjectWithTag("taskPanelPrefabParentTransform");
 
@@ -347,6 +362,9 @@ public class QuestButtonManager : MonoBehaviour
                         Destroy(child.gameObject);
                     }
                 }
+
+                // Добавляем задержку перед уничтожением элемента
+                yield return new WaitForSeconds(destroyDelayDuration);
 
                 // Удаляем кнопку квеста и сам квест из списка
                 Destroy(element.questButton);
@@ -371,18 +389,11 @@ public class QuestButtonManager : MonoBehaviour
 
         float expIncrease = 0;
 
-        
-
         if (questIsCompleted)
         {
             characterProgressControllScript.money += characterProgressControllScript.questMoneyIncreaser;
             characterProgressControllScript.exp += characterProgressControllScript.questExpIncreaser;
-            //expIncrease = characterProgressControllScript.questExpIncreaser / 100f; // Делим на 100 для корректного увеличения
-        }
-
-        if (questIsCompleted)
-        {
-            expIncrease = characterProgressControllScript.exp / 100f; //Делим на 100 для корректного увеличения
+            expIncrease = characterProgressControllScript.questExpIncreaser / 100f;
         }
 
         // Увеличиваем значение слайдера
@@ -402,8 +413,10 @@ public class QuestButtonManager : MonoBehaviour
             characterProgressControllScript.characterLevelSlider.value = overflow; // Остаток после достижения 1
         }
 
-        // Обновляем текстовые поля
-        characterProgressControllScript.characterMoneyValue.text = characterProgressControllScript.money.ToString();
+        if (characterProgressControllScript.characterMoneyValue != null)
+        {
+            characterProgressControllScript.characterMoneyValue.text =
+                characterProgressControllScript.money.ToString();
+        }
     }
-
 }
