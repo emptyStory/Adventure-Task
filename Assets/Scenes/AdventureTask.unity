@@ -11485,6 +11485,9 @@ MonoBehaviour:
   questExpIncreaser: 0
   moneyIncreaseDuration: 1
   expIncreaseDuration: 1
+  levelUpPrefab: {fileID: 0}
+  levelUpPrefabScaleDuration: 0.5
+  levelUpPrefabOffset: {x: 0, y: 1, z: 0}
   money: 0
   exp: 0
   level: 1
@@ -16583,6 +16586,10 @@ MonoBehaviour:
   questExpIncreaser: 20
   moneyIncreaseDuration: 1
   expIncreaseDuration: 1
+  levelUpPrefab: {fileID: 255040327362162528, guid: 4df3678d865a56f46a9cd9bf01acf18e,
+    type: 3}
+  levelUpPrefabScaleDuration: 0.5
+  levelUpPrefabOffset: {x: 0, y: 1, z: 0}
   money: 0
   exp: 0
   level: 1

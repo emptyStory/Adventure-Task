@@ -15,6 +15,14 @@ public class CharacterProgressControll : MonoBehaviour
     [Tooltip("Duration of exp increase animation in seconds")]
     public float expIncreaseDuration = 1f;
 
+    [Header("Level Up Effects")]
+    [Tooltip("Prefab to instantiate when leveling up")]
+    public GameObject levelUpPrefab;
+    [Tooltip("Duration of level up prefab scale animation")]
+    public float levelUpPrefabScaleDuration = 0.5f;
+    [Tooltip("Offset for level up prefab position")]
+    public Vector3 levelUpPrefabOffset = new Vector3(0, 1, 0);
+
     [Tooltip("money")]
     public int money;
     [Tooltip("exp")]
@@ -32,9 +40,11 @@ public class CharacterProgressControll : MonoBehaviour
     public Coroutine expAnimationCoroutine;
 
     private bool isAddingExp = false;
+    private int previousLevel = 1;
 
     void Start()
     {
+        previousLevel = level;
         characterLevelSlider.minValue = 0;
         characterLevelSlider.maxValue = 1;
         characterLevelSlider.value = (float)(exp % expToNextLevel) / expToNextLevel;
@@ -132,6 +142,13 @@ public class CharacterProgressControll : MonoBehaviour
 
                     // Сброс слайдера при повышении уровня
                     characterLevelSlider.value = 0f;
+
+                    // Вызываем эффект повышения уровня
+                    if (levelUpPrefab != null)
+                    {
+                        StartCoroutine(SpawnLevelUpPrefab());
+                    }
+
                     yield return new WaitForSeconds(0.2f); // Небольшая задержка между повышениями уровня
                 }
             }
@@ -146,5 +163,41 @@ public class CharacterProgressControll : MonoBehaviour
         // Финальное обновление
         exp = targetExp;
         characterLevelSlider.value = (float)(exp % expToNextLevel) / expToNextLevel;
+        previousLevel = level;
+    }
+
+    private IEnumerator SpawnLevelUpPrefab()
+    {
+        // Позиция для появления префаба (над персонажем или другим объектом)
+        Vector3 spawnPosition = transform.position + levelUpPrefabOffset;
+
+        // Инстанциируем префаб
+        GameObject levelUpInstance = Instantiate(
+            levelUpPrefab,
+            spawnPosition,
+            Quaternion.identity);
+
+        // Сохраняем исходный масштаб
+        Vector3 originalScale = levelUpInstance.transform.localScale;
+
+        // Устанавливаем начальный масштаб (0)
+        levelUpInstance.transform.localScale = Vector3.zero;
+
+        // Анимация увеличения масштаба
+        float elapsed = 0f;
+        while (elapsed < levelUpPrefabScaleDuration)
+        {
+            elapsed += Time.deltaTime;
+            float progress = Mathf.Clamp01(elapsed / levelUpPrefabScaleDuration);
+
+            // Плавное увеличение масштаба
+            float scaleValue = Mathf.SmoothStep(0f, 1f, progress);
+            levelUpInstance.transform.localScale = originalScale * scaleValue;
+
+            yield return null;
+        }
+
+        // Убедимся, что масштаб установлен точно в исходный
+        levelUpInstance.transform.localScale = originalScale;
     }
 }
