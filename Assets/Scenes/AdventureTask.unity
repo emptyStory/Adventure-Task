@@ -11481,12 +11481,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c32258f606c0ab49b636eca53cde68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskMoneyIncreaser: 0
-  taskExpIncreaser: 0
   questMoneyIncreaser: 0
   questExpIncreaser: 0
+  moneyIncreaseDuration: 1
+  expIncreaseDuration: 1
   money: 0
   exp: 0
+  level: 1
+  expToNextLevel: 100
   characterLevelSlider: {fileID: 0}
   characterLevelValue: {fileID: 0}
   characterMoneyValue: {fileID: 0}
@@ -16577,14 +16579,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c32258f606c0ab49b636eca53cde68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskMoneyIncreaser: 10
-  taskExpIncreaser: 10
-  questMoneyIncreaser: 20
+  questMoneyIncreaser: 25
   questExpIncreaser: 20
+  moneyIncreaseDuration: 1
+  expIncreaseDuration: 1
   money: 0
   exp: 0
-  characterLevelSlider: {fileID: 0}
-  characterLevelValue: {fileID: 0}
+  level: 1
+  expToNextLevel: 100
+  characterLevelSlider: {fileID: 721794299}
+  characterLevelValue: {fileID: 854358157}
   characterMoneyValue: {fileID: 908711201}
 --- !u!1001 &565499882
 PrefabInstance:
@@ -20390,7 +20394,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -40350,7 +40354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408574710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

@@ -311,13 +311,6 @@ public class TaskButtonManager : MonoBehaviour
 
         float expIncrease = 0;
 
-        if (taskIsCompleted)
-        {
-            characterProgressControllScript.money += characterProgressControllScript.taskMoneyIncreaser;
-            characterProgressControllScript.exp += characterProgressControllScript.taskExpIncreaser;
-            //expIncrease = characterProgressControllScript.taskExpIncreaser / 100f; // Делим на 100 для корректного увеличения
-        }
-
         if (questIsCompleted)
         {
             characterProgressControllScript.money += characterProgressControllScript.questMoneyIncreaser;
