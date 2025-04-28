@@ -434,7 +434,31 @@ MonoBehaviour:
   - Assets/Content/Animations/Terrified_02.fbx
   - Assets/Content/Animations/Terrified (1).fbx
   - Assets/Content/Animations/Great Sword Idle (1).fbx
-  uvOverlapAssetList: 00000000ffffffff00000000000000000101000001010000000000000101000000000000000000000000000000000000000000000000000001010000010100000101000001010000010100000000000001010000010100000101000001010000010100000101000001010000010100000101000001010000000000000000000000000000000000000000000000000000
+  - Assets/RFA/Common/Animations/RFA_Death.fbx
+  - Assets/RFA/Common/Animations/RFA_RunLeft.fbx
+  - Assets/RFA/Default Render/Models/RFA_Model.fbx
+  - Assets/RFA/Common/Animations/RFA_RunRight.fbx
+  - Assets/RFA/Common/Animations/RFA_RunForwardRight.fbx
+  - Assets/RFA/Common/Models/RFA_demo_plane_01.obj
+  - Assets/RFA/Common/Animations/RFA_RunBackward.fbx
+  - Assets/RFA/Common/Animations/RFA_Jump_Start.fbx
+  - Assets/RFA/Common/Animations/RFA_TakingDamage.fbx
+  - Assets/RFA/Common/Animations/RFA_RunBackwardRight.fbx
+  - Assets/RFA/Common/Animations/RFA_Jump_Finish.fbx
+  - Assets/RFA/Common/Animations/RFA_RunForwardLeft.fbx
+  - Assets/RFA/Common/Animations/RFA_Jump_Middle.fbx
+  - Assets/RFA/Common/Animations/RFA_RunBackwardLeft.fbx
+  - Assets/RFA/Common/Animations/RFA_Idle.fbx
+  - Assets/RFA/Common/Animations/RFA_RunForward.fbx
+  - Assets/RFA/Common/Models/RFA_demo_props_01.obj
+  - Assets/RFA/Common/Animations/RFA_Jump.fbx
+  - Assets/RFA/URP/Models/RFA_Model.fbx
+  - Assets/RFA/Common/Models/RFA_demo_props_02.obj
+  - Assets/RFA/Common/Animations/RFA_Ability.fbx
+  - Assets/RFA/Common/Animations/RFA_CombatIdle.fbx
+  - Assets/RFA/Common/Animations/RFA_Attack.fbx
+  - Assets/RFA/Common/Animations/RFA_Stun.fbx
+  uvOverlapAssetList: 00000000ffffffff00000000000000000101000001010000000000000101000000000000000000000000000000000000000000000000000001010000010100000101000001010000010100000000000001010000010100000101000001010000010100000101000001010000010100000101000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000101000000000000000000000000000000000000
   xatlasWarningShown: 0
   foundCompatibleSetup: 1
   gpuName: NVIDIA GeForce RTX 3060
