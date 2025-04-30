@@ -1,0 +1,27 @@
+Thank you for purchasing "3D Stylized Goblin(animations+)" asset for Unity! This asset includes a high-quality goblin character model with two materials and 2048x2048 resolution textures, as well as 5 basic animations: run, idle, attack 1, attack 2, death, and taking damage.
+
+Installation:
+To use this asset in your Unity project, simply import the asset package into your project and drag the "Goblin" prefab into your scene. You can then customize animations to fit your game.
+
+Usage:
+The "Goblin" prefab includes a set of animations that can be easily called and controlled through scripting. The available animations are:
+
+Run: The goblin runs in the direction it is facing.
+Idle: The goblin stands still and looks around.
+Attack 1: The goblin swings its weapon in a horizontal arc.
+Attack 2: The goblin stabs forward with its weapon.
+Death: The goblin falls to the ground and stops moving.
+Taking Damage: The goblin flinches and recoils as if hit by an attack.
+To call an animation, simply use the following code in your script:
+
+GetComponent<Animator>().Play("AnimationName");
+Replace "AnimationName" with the name of the animation you want to play (e.g. "Run", "Idle", "Attack1", etc.). You can also use the Animator component to create transitions between animations and blend them together for smooth movement.
+Alse i made controlers with animations, you can check it in folder "3D Stylized Goblin(animations+) -> controlers"
+
+Textures:
+The textures included with this asset are in 2048x2048 resolution and have been optimized for use in Unity. The texture maps include metallic, roughness, normal, height, emmisive, albedo, AO.
+Materials you can check in folder with textures
+Support:
+If you encounter any issues with this asset or have any questions, please don't hesitate to contact us at matvey_pryadko@mail.ru . We are committed to providing high-quality assets and excellent customer service.
+
+Thank you for your purchase, and we hope you enjoy using the "3D Stylized Goblin(animations+)" asset in your Unity project!

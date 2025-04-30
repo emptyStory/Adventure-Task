@@ -458,7 +458,27 @@ MonoBehaviour:
   - Assets/RFA/Common/Animations/RFA_CombatIdle.fbx
   - Assets/RFA/Common/Animations/RFA_Attack.fbx
   - Assets/RFA/Common/Animations/RFA_Stun.fbx
-  uvOverlapAssetList: 00000000ffffffff00000000000000000101000001010000000000000101000000000000000000000000000000000000000000000000000001010000010100000101000001010000010100000000000001010000010100000101000001010000010100000101000001010000010100000101000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000101000000000000000000000000000000000000
+  - Assets/3D Stylized Goblin(animations+)/controlers/Idle2Idle2.fbx
+  - Assets/3D Stylized Goblin(animations+)/controlers/Attack1Attack1.fbx
+  - Assets/3D Stylized Goblin(animations+)/controlers/runrun.fbx
+  - Assets/3D Stylized Goblin(animations+)/Assets/Goblin.fbx
+  - Assets/3D Stylized Goblin(animations+)/controlers/damagedamage.fbx
+  - Assets/3D Stylized Goblin(animations+)/controlers/attack2attack.fbx
+  - Assets/3D Stylized Goblin(animations+)/controlers/deathdeath.fbx
+  - Assets/Cardboard_Fat_Man/BaseMesh/Cardboard_Fat_Man.fbx
+  - Assets/Cardboard_Fat_Man/Stand/Stand.fbx
+  - Assets/Cardboard_Fat_Man/BaseMesh/Weapon/Weapon.fbx
+  - Assets/Books/3dobjects_FBX/books.fbx
+  - Assets/Content/Animations/BookGiftCutScene/SecondCharacter_Walking (1).fbx
+  - Assets/Content/Animations/BookGiftCutScene/MainCharacter_Talking.fbx
+  - Assets/Content/Animations/BookGiftCutScene/MainCharacter_Quick Informal Bow.fbx
+  - Assets/Content/Animations/BookGiftCutScene/MainCharacter_Standing Greeting.fbx
+  - Assets/Content/Animations/BookGiftCutScene/SecondCharecter_Happy Idle.fbx
+  - Assets/Content/Animations/BookGiftCutScene/SecondCharacter_Salute.fbx
+  - Assets/Content/Animations/BookGiftCutScene/MainCharacter_Breathing Idle.fbx
+  - Assets/Content/Animations/BookGiftCutScene/SecondCharacter_Talking (1).fbx
+  - Assets/Content/Not_AssetStore/Cardboard_Fat_Man/BaseMesh/Cardboard_Fat_Man.fbx
+  uvOverlapAssetList: 00000000ffffffff000000000000000001010000010100000000000001010000000000000000000000000000000000000000000000000000010100000101000001010000010100000101000000000000010100000101000001010000010100000101000001010000010100000101000001010000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000
   xatlasWarningShown: 0
   foundCompatibleSetup: 1
   gpuName: NVIDIA GeForce RTX 3060
