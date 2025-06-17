@@ -499,7 +499,72 @@ MonoBehaviour:
   - Assets/ZNS3D/Mix_Furniture_Pack/Meshes/big_sofa.fbx
   - Assets/ZNS3D/Mix_Furniture_Pack/Meshes/floor.fbx
   - Assets/Content/Asset Store/ZNS3D/Mix_Furniture_Pack/Meshes/floor.fbx
-  uvOverlapAssetList: 00000000ffffffff000000000000000001010000010100000000000001010000000000000000000000000000000000000000000000000000010100000101000001010000010100000101000000000000010100000101000001010000010100000101000001010000010100000101000001010000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000001010000000000000000000001010000000000000101000001010000010100000000000000000000000000000000000000000000010100000000000000000000000000000101000001010000
+  - Assets/Low Poly Casual Magic Book/Objects/Magic Book/Meshes/Magic Book.fbx
+  - Assets/3DForge/Fantasy_Interiors/Villages_&_Towns/Meshes/Forge/fi_vil_forge_forgebase.fbx
+  - Assets/FantasyCastleDemo/Models/barrel 1.fbx
+  - Assets/FantasyCastleDemo/Models/wall1.fbx
+  - Assets/FantasyCastleDemo/Models/pillar1.fbx
+  - Assets/FantasyCastleDemo/Models/ground 1.fbx
+  - Assets/BK_AlchemistHouse/Models/Items/Organic/Apple.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Organic/Bulb01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Bottle03.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Organic/Baby02.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Lab/Alembic01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Organic/Skull01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Books/Book01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterGlass01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Lab/LabSetup03.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Flask01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Weapons/Sword01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Ingredients/Ingredient01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Weapons/Arrow01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Misc/Trunk01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Flask04.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Lab/liquid.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Bottle03b.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Ingredients/Ingredient05.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterBowl03.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Ingredients/Ingredient06.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Flask03.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Ingredients/Ingredient03.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Ingredients/Ingredient07.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Weapons/Dagger01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Books/Book04.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Lab/LabSetup02.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterPichet02.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterBowl01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterPichet03.FBX
+  - Assets/BK_AlchemistHouse/Models/Furniture/TableSink.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Weapons/Bow01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Organic/Baby03.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Bottle01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Lights/Candle01b.FBX
+  - Assets/BK_AlchemistHouse/Models/Furniture/Table.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Bottle01b.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Flask07.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterTanker01.FBX
+  - Assets/BK_AlchemistHouse/Models/Furniture/Table04.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Flask05.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Flask02.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Weapons/Staff01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Organic/Brain.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Organic/Skull02.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterPichet01.FBX
+  - Assets/BK_AlchemistHouse/Models/Architecture/FloorT.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Organic/Baby01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Bottle02.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterGlass02.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Bottle02b.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Ingredients/Ingredient04.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Books/Book03.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterPlate01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Bottles/Jar.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Ingredients/Ingredient02.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Weapons/Axe01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Lights/Candle01a.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Lab/LabSetup01.FBX
+  - Assets/BK_AlchemistHouse/Models/Items/Dishes/ClutterBowl02.FBX
+  uvOverlapAssetList: 00000000ffffffff0000000000000000010100000101000000000000010100000000000000000000000000000000000000000000000000000101000001010000010100000101000001010000000000000101000001010000010100000101000001010000010100000101000001010000010100000101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010100000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000010100000000000000000000010100000000000001010000010100000101000000000000000000000000000000000000000000000101000000000000000000000000000001010000010100000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000010100000000000000000000000000000000000000000000000000000101000001010000000000000000000000000000000000000000000000000000000000000101000001010000000000000000000000000000010100000000000000000000000000000000000001010000010100000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000001010000000000000101000000000000000000000000000000000000000000000101000000000000
   xatlasWarningShown: 0
   foundCompatibleSetup: 1
   gpuName: NVIDIA GeForce RTX 3060
